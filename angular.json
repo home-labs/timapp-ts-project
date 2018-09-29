@@ -116,6 +116,46 @@
           }
         }
       }
+    },
+    "ng-timapp": {
+      "root": "projects/ng-timapp",
+      "sourceRoot": "projects/ng-timapp/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-timapp/tsconfig.lib.json",
+            "project": "projects/ng-timapp/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ng-timapp/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-timapp/src/test.ts",
+            "tsConfig": "projects/ng-timapp/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-timapp/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-timapp/tsconfig.lib.json",
+              "projects/ng-timapp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-timapp-project"
