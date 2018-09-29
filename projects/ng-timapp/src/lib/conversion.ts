@@ -13,7 +13,8 @@ export class Conversion {
         this.minutes = attrs['minutes'] || 0;
         this.seconds = attrs['seconds'] || 0;
 
-        this.resolve(attrs);
+        this.calculate();
+        this.format();
     }
 
     getHours(): string {
@@ -26,27 +27,6 @@ export class Conversion {
 
     getSeconds(): string {
         return this.secondsAsString;
-    }
-
-    private resolve(attrs: Object) {
-        let
-            relativeUnity: string;
-
-        const
-            keys = Object.keys(attrs);
-
-        if (keys.length) {
-            relativeUnity = keys[0];
-        }
-
-        if (relativeUnity) {
-            switch(relativeUnity) {
-                case 'seconds': this.makeThroughSeconds()
-                    break;
-            }
-        }
-
-        this.format();
     }
 
     private format() {
@@ -63,18 +43,17 @@ export class Conversion {
         }
     }
 
-    private makeThroughSeconds() {
-        let
-            minutes = Math.trunc(this.seconds / 60),
-            elapsedMinutes: number = minutes % 60,
-            elapsedSeconds: number = this.seconds % 60;
+    private calculate() {
 
         const
-            hours = Math.trunc(minutes / 60);
+            seconds: number = this.seconds - (Math.trunc(this.seconds / 60) * 60),
+            totalMinutes: number = this.minutes + Math.trunc(this.seconds / 60),
+            minutes: number = totalMinutes - (Math.trunc(totalMinutes / 60) * 60),
+            hours: number = this.hours + Math.trunc(totalMinutes / 60);
 
         this.hoursAsString = `${hours}`;
-        this.minutesAsString = `${elapsedMinutes}`;
-        this.secondsAsString = `${elapsedSeconds}`;
+        this.minutesAsString = `${minutes}`;
+        this.secondsAsString = `${seconds}`;
     }
 
 }
