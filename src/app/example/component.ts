@@ -19,7 +19,6 @@ export class ExampleComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.conversor.makeThroughSeconds();
         console.log('horas: ', this.conversor.getHours());
         console.log('minutos: ', this.conversor.getMinutes());
         console.log('segundos: ', this.conversor.getSeconds());
