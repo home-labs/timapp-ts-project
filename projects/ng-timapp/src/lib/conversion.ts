@@ -13,7 +13,7 @@ export class Conversion {
         this.minutes = attrs['minutes'] || 0;
         this.seconds = attrs['seconds'] || 0;
 
-        this.resolve();
+        this.resolve(attrs);
     }
 
     getHours(): string {
@@ -28,9 +28,22 @@ export class Conversion {
         return this.secondsAsString;
     }
 
-    private resolve() {
-        if (this.seconds) {
-            this.makeThroughSeconds();
+    private resolve(attrs: Object) {
+        let
+            relativeUnity: string;
+
+        const
+            keys = Object.keys(attrs);
+
+        if (keys.length) {
+            relativeUnity = keys[0];
+        }
+
+        if (relativeUnity) {
+            switch(relativeUnity) {
+                case 'seconds': this.makeThroughSeconds()
+                    break;
+            }
         }
 
         this.format();
