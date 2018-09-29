@@ -1,7 +1,4 @@
-/*
- * Public API Surface of ng-timapp
- */
+import * as NgTimapp from './lib';
+export { NgTimapp };
 
-export * from './lib/ng-timapp.service';
-export * from './lib/ng-timapp.component';
-export * from './lib/ng-timapp.module';
+export { NgTimappModule } from './lib/module';
