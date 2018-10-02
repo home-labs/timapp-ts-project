@@ -46,8 +46,9 @@ export class Conversion {
     private calculate() {
 
         const
-            seconds: number = this.seconds - (Math.trunc(this.seconds / 60) * 60),
-            totalMinutes: number = this.minutes + Math.trunc(this.seconds / 60),
+            totalSeconds: number = this.seconds,
+            seconds: number = totalSeconds - (Math.trunc(totalSeconds / 60) * 60),
+            totalMinutes: number = this.minutes + Math.trunc(totalSeconds / 60),
             minutes: number = totalMinutes - (Math.trunc(totalMinutes / 60) * 60),
             hours: number = this.hours + Math.trunc(totalMinutes / 60);
 
