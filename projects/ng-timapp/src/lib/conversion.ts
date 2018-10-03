@@ -1,3 +1,6 @@
+import { Formatting } from './formatting';
+
+
 export class Conversion {
 
     private hours: number;
@@ -16,30 +19,6 @@ export class Conversion {
         this.calculate();
     }
 
-    static formatHours(hours: number): string {
-        if (hours < 10) {
-            return `0${hours}`;
-        }
-
-        return `${hours}`;
-    }
-
-    static formatMinutes(minutes: number): string {
-        if (minutes < 10) {
-            return `0${minutes}`;
-        }
-
-        return `${minutes}`;
-    }
-
-    static formatSerconds(seconds: number): string {
-        if (seconds < 10) {
-            return `0${seconds}`;
-        }
-
-        return `${seconds}`;
-    }
-
     getHours(): number {
         return this.calculatedHours;
     }
@@ -53,15 +32,15 @@ export class Conversion {
     }
 
     getFormatedHours(): string {
-        return Conversion.formatHours(this.calculatedHours);
+        return Formatting.formatHours(this.calculatedHours);
     }
 
     getFormatedMinutes(): string {
-        return Conversion.formatMinutes(this.calculatedMinutes);
+        return Formatting.formatMinutes(this.calculatedMinutes);
     }
 
     getFormatedSerconds(): string {
-        return Conversion.formatSerconds(this.calculatedSeconds);
+        return Formatting.formatSerconds(this.calculatedSeconds);
     }
 
     private calculate() {

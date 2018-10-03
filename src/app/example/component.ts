@@ -24,9 +24,18 @@ export class ExampleComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('hours: ', this.conversor.getFormatedHours());
-        console.log('minutes: ', this.conversor.getFormatedMinutes());
-        console.log('seconds: ', this.conversor.getFormatedSerconds());
+        const
+            map = {
+                hours : 1,
+                minutes: 29,
+                seconds: 30
+            };
+
+        // console.log('hours: ', this.conversor.getFormatedHours());
+        // console.log('minutes: ', this.conversor.getFormatedMinutes());
+        // console.log('seconds: ', this.conversor.getFormatedSerconds());
+
+        console.log('soma: ', NgTimapp.Calculation.sum(map, map));
     }
 
 }
