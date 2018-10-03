@@ -53,7 +53,7 @@ export class Conversion {
     }
 
     getFormatedHours(): string {
-        return Conversion.formatHours(this.hours);
+        return Conversion.formatHours(this.calculatedHours);
     }
 
     getFormatedMinutes(): string {
