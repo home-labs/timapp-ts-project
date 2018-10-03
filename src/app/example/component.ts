@@ -18,15 +18,15 @@ export class ExampleComponent implements OnInit {
     constructor() {
         this.conversor = new NgTimapp.Conversion(
             {
-                seconds: 7264
+                seconds: 69
             }
         );
     }
 
     ngOnInit() {
-        console.log('horas: ', this.conversor.getHours());
-        console.log('minutos: ', this.conversor.getMinutes());
-        console.log('segundos: ', this.conversor.getSeconds());
+        console.log('horas: ', this.conversor.getFormatedHours());
+        console.log('minutos: ', this.conversor.getFormatedMinutes());
+        console.log('segundos: ', this.conversor.getFormatedSerconds());
     }
 
 }

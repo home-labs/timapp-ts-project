@@ -4,9 +4,9 @@ export class Conversion {
     private minutes: number;
     private seconds: number;
 
-    private hoursAsString: string;
-    private minutesAsString: string;
-    private secondsAsString: string;
+    private calculatedHours: number;
+    private calculatedMinutes: number;
+    private calculatedSeconds: number;
 
     constructor(attrs: Object = {}) {
         this.hours = attrs['hours'] || 0;
@@ -14,33 +14,42 @@ export class Conversion {
         this.seconds = attrs['seconds'] || 0;
 
         this.calculate();
-        this.format();
     }
 
-    getHours(): string {
-        return this.hoursAsString;
+    getHours(): number {
+        return this.calculatedHours;
     }
 
-    getMinutes(): string {
-        return this.minutesAsString;
+    getMinutes(): number {
+        return this.calculatedMinutes;
     }
 
-    getSeconds(): string {
-        return this.secondsAsString;
+    getSeconds(): number {
+        return this.calculatedSeconds;
     }
 
-    private format() {
-        if (parseInt(this.hoursAsString) < 10) {
-            this.hoursAsString = `0${this.hoursAsString}`;
+    getFormatedHours(): string {
+        if (this.calculatedHours < 10) {
+            return `0${this.calculatedHours}`;
         }
 
-        if (parseInt(this.minutesAsString) < 10) {
-            this.minutesAsString = `0${this.minutesAsString}`;
+        return `${this.calculatedHours}`;
+    }
+
+    getFormatedMinutes() {
+        if (this.calculatedMinutes < 10) {
+            return `0${this.calculatedMinutes}`;
         }
 
-        if (parseInt(this.secondsAsString) < 10) {
-            this.secondsAsString = `0${this.secondsAsString}`;
+        return `${this.calculatedMinutes}`;
+    }
+
+    getFormatedSerconds() {
+        if (this.calculatedSeconds < 10) {
+            return `0${this.calculatedSeconds}`;
         }
+
+        return `${this.calculatedSeconds}`;
     }
 
     private calculate() {
@@ -52,9 +61,9 @@ export class Conversion {
             minutes: number = totalMinutes - (Math.trunc(totalMinutes / 60) * 60),
             hours: number = this.hours + Math.trunc(totalMinutes / 60);
 
-        this.hoursAsString = `${hours}`;
-        this.minutesAsString = `${minutes}`;
-        this.secondsAsString = `${seconds}`;
+        this.calculatedHours = hours;
+        this.calculatedMinutes = minutes;
+        this.calculatedSeconds = seconds;
     }
 
 }
