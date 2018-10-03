@@ -16,6 +16,30 @@ export class Conversion {
         this.calculate();
     }
 
+    static formatHours(hours: number): string {
+        if (hours < 10) {
+            return `0${hours}`;
+        }
+
+        return `${hours}`;
+    }
+
+    static formatMinutes(minutes: number): string {
+        if (minutes < 10) {
+            return `0${minutes}`;
+        }
+
+        return `${minutes}`;
+    }
+
+    static formatSerconds(seconds: number): string {
+        if (seconds < 10) {
+            return `0${seconds}`;
+        }
+
+        return `${seconds}`;
+    }
+
     getHours(): number {
         return this.calculatedHours;
     }
@@ -29,27 +53,15 @@ export class Conversion {
     }
 
     getFormatedHours(): string {
-        if (this.calculatedHours < 10) {
-            return `0${this.calculatedHours}`;
-        }
-
-        return `${this.calculatedHours}`;
+        return Conversion.formatHours(this.hours);
     }
 
-    getFormatedMinutes() {
-        if (this.calculatedMinutes < 10) {
-            return `0${this.calculatedMinutes}`;
-        }
-
-        return `${this.calculatedMinutes}`;
+    getFormatedMinutes(): string {
+        return Conversion.formatMinutes(this.calculatedMinutes);
     }
 
-    getFormatedSerconds() {
-        if (this.calculatedSeconds < 10) {
-            return `0${this.calculatedSeconds}`;
-        }
-
-        return `${this.calculatedSeconds}`;
+    getFormatedSerconds(): string {
+        return Conversion.formatSerconds(this.calculatedSeconds);
     }
 
     private calculate() {
