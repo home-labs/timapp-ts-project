@@ -13,9 +13,18 @@ import { NgTimapp } from '../../../projects/ng-timapp/src/public_api';
 })
 export class ExampleComponent implements OnInit {
 
+    private calculation: NgTimapp.Calculation;
     private conversor: NgTimapp.Conversion;
 
+    private time: Object = {
+        hours: 1,
+        minutes: 60,
+        seconds: 61
+    };
+
     constructor() {
+        this.calculation = new NgTimapp.Calculation(this.time);
+
         this.conversor = new NgTimapp.Conversion(
             {
                 seconds: 7777
@@ -24,18 +33,11 @@ export class ExampleComponent implements OnInit {
     }
 
     ngOnInit() {
-        const
-            map = {
-                hours : 1,
-                minutes: 29,
-                seconds: 30
-            };
-
         // console.log('hours: ', this.conversor.getFormatedHours());
         // console.log('minutes: ', this.conversor.getFormatedMinutes());
         // console.log('seconds: ', this.conversor.getFormatedSerconds());
 
-        console.log('soma: ', NgTimapp.Calculation.sum(map, map));
+        console.log('soma: ', this.calculation.sum(this.time));
     }
 
 }
