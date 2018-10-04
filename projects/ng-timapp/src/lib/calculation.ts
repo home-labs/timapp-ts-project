@@ -54,8 +54,8 @@ export class Calculation {
                 } else {
                     minutesOverSeconds = this
                         .minutesContainedInSeconds(o['seconds']);
-                    this.seconds = this.calculateSeconds(o['seconds']);
                     this.minutes += minutesOverSeconds;
+                    this.seconds = this.calculateSeconds(o['seconds']);
                 }
 
                 if (!o['minutes']) {
@@ -67,9 +67,8 @@ export class Calculation {
                 } else {
                     hoursOverMinutes = this
                         .hoursContainedInMinutes(o['minutes']);
-                    this.minutes = this
-                        .calculateMinutes(o['minutes']);
                     this.hours += hoursOverMinutes;
+                    this.minutes = this.calculateMinutes(o['minutes']);
                 }
 
                 if (!o['hours']) {
