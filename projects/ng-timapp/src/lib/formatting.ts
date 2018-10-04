@@ -1,9 +1,5 @@
 export class Formatting {
 
-    constructor() {
-
-    }
-
     static formatHours(hours: number): string {
         if (hours < 10) {
             return `0${hours}`;

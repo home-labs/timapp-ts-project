@@ -1,15 +1,13 @@
-// ver só a questão da dependência circular, porque um não pode depender do outro bem como o outro do um ao mesmo tempo
-
 export class Calculation {
 
     private hours: number;
     private minutes: number;
     private seconds: number;
 
-    constructor(attrs: Object = { hours: 0, minutes: 0, seconds: 0 }) {
-        this.hours = attrs['hours'];
-        this.minutes = attrs['minutes'];
-        this.seconds = attrs['seconds'];
+    constructor(attrs: Object = {}) {
+        this.hours = attrs['hours'] || 0;
+        this.minutes = attrs['minutes'] || 0;
+        this.seconds = attrs['seconds'] || 0;
     }
 
     minutesContainedInSeconds(...seconds): number {
@@ -39,6 +37,10 @@ export class Calculation {
 
         time.forEach(
             (o: Object) => {
+                if (!o['seconds']) {
+                    o['seconds'] = 0;
+                }
+
                 if ((o['seconds'] + this.seconds) < 60) {
                     this.seconds += o['seconds'];
                 } else {
@@ -46,6 +48,10 @@ export class Calculation {
                         .minutesContainedInSeconds(o['seconds']);
                     this.seconds = this.calculateSeconds(o['seconds']);
                     this.minutes += minutesOverSeconds;
+                }
+
+                if (!o['minutes']) {
+                    o['minutes'] = 0;
                 }
 
                 if ((o['minutes'] + this.minutes) < 60) {
@@ -56,6 +62,10 @@ export class Calculation {
                     this.minutes = this
                         .calculateMinutes(o['minutes']);
                     this.hours += hoursOverMinutes;
+                }
+
+                if (!o['hours']) {
+                    o['hours'] = 0;
                 }
 
                 this.hours += o['hours'];
