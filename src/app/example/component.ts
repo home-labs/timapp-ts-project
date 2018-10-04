@@ -17,7 +17,7 @@ export class ExampleComponent implements OnInit {
     private conversor: NgTimapp.Conversion;
 
     private time: Object = {
-        hours: 1,
+        hours: 0,
         minutes: 60,
         seconds: 61
     };
@@ -37,7 +37,10 @@ export class ExampleComponent implements OnInit {
         // console.log('minutes: ', this.conversor.getFormatedMinutes());
         // console.log('seconds: ', this.conversor.getFormatedSerconds());
 
-        console.log('soma: ', this.calculation.sum(this.time));
+        this.calculation.sum(this.time)
+        console.log('hours: ', this.calculation.getHours());
+        console.log('minutes: ', this.calculation.getMinutes());
+        console.log('seconds: ', this.calculation.getSeconds());
     }
 
 }

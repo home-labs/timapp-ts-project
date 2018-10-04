@@ -1,3 +1,5 @@
+// ver só a questão da dependência circular, porque um não pode depender do outro bem como o outro do um ao mesmo tempo
+
 export class Calculation {
 
     private hours: number;
@@ -10,57 +12,67 @@ export class Calculation {
         this.seconds = attrs['seconds'];
     }
 
-    static minutesContainedInSeconds(...seconds): number {
-        return Math.trunc(Calculation.sumValues.apply(null, seconds) / 60);
+    minutesContainedInSeconds(...seconds): number {
+        return Math.trunc(Calculation.sumValues
+            .apply(null, [this.seconds].concat(seconds)) / 60);
     }
 
-    static hoursContainedInMinutes(...minutes): number {
-        return Math.trunc(Calculation.sumValues.apply(null, minutes) / 60);
+    hoursContainedInMinutes(...minutes): number {
+        return Math.trunc(Calculation.sumValues
+            .apply(null, [this.minutes].concat(minutes)) / 60);
     }
 
-    static calculateSeconds(...seconds) {
-        return Calculation.sumValues.apply(null, seconds) - (Calculation.minutesContainedInSeconds.apply(null, seconds) * 60);
+    calculateSeconds(...seconds) {
+        return Calculation.sumValues.apply(null, [this.seconds].concat(seconds)) -
+            (this.minutesContainedInSeconds.apply(this, seconds) * 60);
     }
 
-    static calculateMinutes(...minutes) {
-        return Calculation.sumValues.apply(null, minutes) - (Calculation.hoursContainedInMinutes.apply(null, minutes) * 60);
+    calculateMinutes(...minutes) {
+        return Calculation.sumValues.apply(null, [this.minutes].concat(minutes)) -
+            (this.hoursContainedInMinutes.apply(this, minutes) * 60);
     }
 
-    sum(...time): Object {
+    sum(...time) {
         let
-            hours: number = this.hours,
-            minutes: number = this.minutes,
-            seconds: number = this.seconds,
             minutesOverSeconds: number,
             hoursOverMinutes: number;
 
         time.forEach(
             (o: Object) => {
-                if ((o['seconds'] + seconds) < 60) {
-                    seconds += o['seconds'];
+                if ((o['seconds'] + this.seconds) < 60) {
+                    this.seconds += o['seconds'];
                 } else {
-                    minutesOverSeconds = Calculation.minutesContainedInSeconds(seconds, o['seconds']);
-                    seconds = Calculation.calculateSeconds(seconds, o['seconds']);
-                    minutes += minutesOverSeconds;
+                    minutesOverSeconds = this
+                        .minutesContainedInSeconds(o['seconds']);
+                    this.seconds = this.calculateSeconds(o['seconds']);
+                    this.minutes += minutesOverSeconds;
                 }
 
-                if ((o['minutes'] + minutes) < 60) {
-                    minutes += o['minutes'];
+                if ((o['minutes'] + this.minutes) < 60) {
+                    this.minutes += o['minutes'];
                 } else {
-                    hoursOverMinutes = Calculation.hoursContainedInMinutes(minutes, o['minutes']);
-                    minutes = Calculation.calculateMinutes(minutes, o['minutes']);
-                    hours += hoursOverMinutes;
+                    hoursOverMinutes = this
+                        .hoursContainedInMinutes(o['minutes']);
+                    this.minutes = this
+                        .calculateMinutes(o['minutes']);
+                    this.hours += hoursOverMinutes;
                 }
 
-                hours += o['hours'];
+                this.hours += o['hours'];
             }
         );
+    }
 
-        return {
-            hours: hours,
-            minutes: minutes,
-            seconds: seconds
-        };
+    getHours(): number {
+        return this.hours;
+    }
+
+    getMinutes(): number {
+        return this.minutes;
+    }
+
+    getSeconds(): number {
+        return this.seconds;
     }
 
     private static sumValues(...values) {
