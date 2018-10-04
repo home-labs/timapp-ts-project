@@ -20,17 +20,25 @@ export class Calculation {
             .apply(null, [this.minutes].concat(minutes)) / 60);
     }
 
-    calculateSeconds(...seconds) {
+    calculateSeconds(...seconds): number {
+        this.minutes += this.minutesContainedInSeconds();
+
         return Calculation.sumValues.apply(null, [this.seconds].concat(seconds)) -
             (this.minutesContainedInSeconds.apply(this, seconds) * 60);
     }
 
-    calculateMinutes(...minutes) {
+    calculateMinutes(...minutes): number {
+        this.hours += this.hoursContainedInMinutes();
+
         return Calculation.sumValues.apply(null, [this.minutes].concat(minutes)) -
             (this.hoursContainedInMinutes.apply(this, minutes) * 60);
     }
 
-    sum(...time) {
+    calculateHours(): number {
+        return this.hours;
+    }
+
+    sum(...time): Object {
         let
             minutesOverSeconds: number,
             hoursOverMinutes: number;
@@ -71,18 +79,13 @@ export class Calculation {
                 this.hours += o['hours'];
             }
         );
-    }
 
-    getHours(): number {
-        return this.hours;
-    }
 
-    getMinutes(): number {
-        return this.minutes;
-    }
-
-    getSeconds(): number {
-        return this.seconds;
+        return {
+            hours: this.hours,
+            minutes: this.minutes,
+            seconds: this.seconds
+        }
     }
 
     private static sumValues(...values) {

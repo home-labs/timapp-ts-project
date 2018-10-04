@@ -1,3 +1,4 @@
+import { Calculation } from './calculation';
 import { Formatting } from './formatting';
 
 
@@ -11,10 +12,14 @@ export class Conversion {
     private calculatedMinutes: number;
     private calculatedSeconds: number;
 
+    private calculation: Calculation;
+
     constructor(attrs: Object = {}) {
         this.hours = attrs['hours'] || 0;
         this.minutes = attrs['minutes'] || 0;
         this.seconds = attrs['seconds'] || 0;
+
+        this.calculation = new Calculation(attrs);
 
         this.calculate();
     }
@@ -52,9 +57,10 @@ export class Conversion {
             minutes: number = totalMinutes - (Math.trunc(totalMinutes / 60) * 60),
             hours: number = this.hours + Math.trunc(totalMinutes / 60);
 
-        this.calculatedHours = hours;
-        this.calculatedMinutes = minutes;
-        this.calculatedSeconds = seconds;
+        this.calculatedSeconds = this.calculation.calculateSeconds();
+        this.calculatedMinutes = this.calculation.calculateMinutes();
+        this.calculatedHours = this.calculation.calculateHours();
+
     }
 
 }
