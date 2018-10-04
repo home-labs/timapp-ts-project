@@ -21,20 +21,20 @@ export class Calculation {
     }
 
     calculateSeconds(...seconds): number {
-        this.minutes += this.minutesContainedInSeconds();
-
         return Calculation.sumValues.apply(null, [this.seconds].concat(seconds)) -
             (this.minutesContainedInSeconds.apply(this, seconds) * 60);
     }
 
     calculateMinutes(...minutes): number {
-        this.hours += this.hoursContainedInMinutes();
+        this.minutes += this.minutesContainedInSeconds();
 
         return Calculation.sumValues.apply(null, [this.minutes].concat(minutes)) -
             (this.hoursContainedInMinutes.apply(this, minutes) * 60);
     }
 
     calculateHours(): number {
+        this.hours += this.hoursContainedInMinutes();
+
         return this.hours;
     }
 
