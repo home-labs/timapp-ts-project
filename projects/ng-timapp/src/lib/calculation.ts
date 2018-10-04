@@ -10,19 +10,10 @@ export class Calculation {
         this.seconds = attrs['seconds'] || 0;
     }
 
-    minutesContainedInSeconds(...seconds): number {
-        return Math.trunc(Calculation.sumValues
-            .apply(null, [this.seconds].concat(seconds)) / 60);
-    }
+    calculateHours(): number {
+        this.hours += this.hoursContainedInMinutes();
 
-    hoursContainedInMinutes(...minutes): number {
-        return Math.trunc(Calculation.sumValues
-            .apply(null, [this.minutes].concat(minutes)) / 60);
-    }
-
-    calculateSeconds(...seconds): number {
-        return Calculation.sumValues.apply(null, [this.seconds].concat(seconds)) -
-            (this.minutesContainedInSeconds.apply(this, seconds) * 60);
+        return this.hours;
     }
 
     calculateMinutes(...minutes): number {
@@ -32,10 +23,19 @@ export class Calculation {
             (this.hoursContainedInMinutes.apply(this, minutes) * 60);
     }
 
-    calculateHours(): number {
-        this.hours += this.hoursContainedInMinutes();
+    calculateSeconds(...seconds): number {
+        return Calculation.sumValues.apply(null, [this.seconds].concat(seconds)) -
+            (this.minutesContainedInSeconds.apply(this, seconds) * 60);
+    }
 
-        return this.hours;
+    minutesContainedInSeconds(...seconds): number {
+        return Math.trunc(Calculation.sumValues
+            .apply(null, [this.seconds].concat(seconds)) / 60);
+    }
+
+    hoursContainedInMinutes(...minutes): number {
+        return Math.trunc(Calculation.sumValues
+            .apply(null, [this.minutes].concat(minutes)) / 60);
     }
 
     sum(...time): Object {
@@ -79,7 +79,6 @@ export class Calculation {
                 this.hours += o['hours'];
             }
         );
-
 
         return {
             hours: this.hours,
