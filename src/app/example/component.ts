@@ -27,17 +27,18 @@ export class ExampleComponent implements OnInit {
 
         this.conversor = new NgTimapp.Conversion(
             {
-                seconds: 7777
+                minutes: 99
+                // seconds: 7777
             }
         );
     }
 
     ngOnInit() {
-        // console.log('hours: ', this.conversor.getFormatedHours());
-        // console.log('minutes: ', this.conversor.getFormatedMinutes());
+        console.log('hours: ', this.conversor.getFormatedHours());
+        console.log('minutes: ', this.conversor.getFormatedMinutes());
         // console.log('seconds: ', this.conversor.getFormatedSerconds());
 
-        console.log('sum: ', this.calculation.sum({ seconds: 61 }));
+        // console.log('sum: ', this.calculation.sum({ seconds: 61 }));
     }
 
 }
