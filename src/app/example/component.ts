@@ -27,7 +27,8 @@ export class ExampleComponent implements OnInit {
 
         this.conversor = new NgTimapp.Conversion(
             {
-                minutes: 99
+                minutes: '99'
+                // minutes: 99
                 // seconds: 7777
             }
         );

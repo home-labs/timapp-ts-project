@@ -5,9 +5,9 @@ export class Calculation {
     private seconds: number;
 
     constructor(attrs: Object = {}) {
-        this.hours = attrs['hours'] || 0;
-        this.minutes = attrs['minutes'] || 0;
-        this.seconds = attrs['seconds'] || 0;
+        this.hours = parseInt(attrs['hours']) || 0;
+        this.minutes = parseInt(attrs['minutes']) || 0;
+        this.seconds = parseInt(attrs['seconds']) || 0;
     }
 
     calculateHours(): number {
