@@ -41,6 +41,7 @@ export class Conversion {
     }
 
     private calculate() {
+        // this order it's important
         this.seconds = this.calculation.calculateSeconds();
         this.minutes = this.calculation.calculateMinutes();
         this.hours = this.calculation.calculateHours();
