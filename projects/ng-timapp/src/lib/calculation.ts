@@ -59,7 +59,7 @@ export class Calculation {
                 this.hours = this.calculateHours();
                 this.hours += o['hours'];
 
-                // reconfigure absolute time
+                // resets absolute time values
                 this.absMinutes = this.minutes;
                 this.absSeconds = this.seconds;
             }
