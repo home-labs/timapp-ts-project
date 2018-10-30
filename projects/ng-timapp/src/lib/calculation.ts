@@ -1,37 +1,38 @@
 export class Calculation {
 
-    private absMinutes: number;
     private absSeconds: number;
-
+    private absMinutes: number;
     private hours: number;
     private minutes: number;
     private seconds: number;
 
     constructor(attrs: Object = {}) {
-        this.hours = parseInt(attrs['hours']) || 0;
-        this.absMinutes = parseInt(attrs['minutes']) || 0;
         this.absSeconds = parseInt(attrs['seconds']) || 0;
-
-        this.seconds = 0;
+        this.absMinutes = parseInt(attrs['minutes']) || 0;
+        this.hours = parseInt(attrs['hours']) || 0;
         this.minutes = 0;
+        this.seconds = 0;
     }
 
-    calculateHours(): number {
+    calculateHours(additionalHours: number = 0): number {
+        this.hours += additionalHours;
+
         return this.hours += this.hoursContainedInMinutes(this.absMinutes);
     }
 
     calculateMinutes(additionalMinutes: number = 0): number {
-        this.absMinutes += this.minutesContainedInSeconds(this.absSeconds);
+        this.absMinutes += additionalMinutes;
 
-        return Calculation.sumValues(this.absMinutes, additionalMinutes) -
-            (this.hoursContainedInMinutes(this.absMinutes +
-                additionalMinutes) * 60);
+        this.absMinutes += this.minutesContainedInSeconds(this.absSeconds);
+        return this.absMinutes -
+            (this.hoursContainedInMinutes(this.absMinutes) * 60);
     }
 
     calculateSeconds(additionalSeconds: number = 0): number {
-        return Calculation.sumValues(this.absSeconds, additionalSeconds) -
-            (this.minutesContainedInSeconds(this.absSeconds +
-                additionalSeconds) * 60);
+        this.absSeconds += additionalSeconds;
+
+        return this.absSeconds -
+            (this.minutesContainedInSeconds(this.absSeconds) * 60);
     }
 
     sum(...time): Object {
@@ -44,7 +45,6 @@ export class Calculation {
                     o['seconds'] = 0;
                 }
                 this.seconds = this.calculateSeconds(o['seconds']);
-                this.absSeconds += o['seconds'];
 
                 // resolve minutes
                 if (!o['minutes']) {
@@ -56,8 +56,7 @@ export class Calculation {
                 if (!o['hours']) {
                     o['hours'] = 0;
                 }
-                this.hours = this.calculateHours();
-                this.hours += o['hours'];
+                this.hours = this.calculateHours(o['hours']);
 
                 // resets absolute time values
                 this.absMinutes = this.minutes;
@@ -71,19 +70,6 @@ export class Calculation {
             seconds: this.seconds
         }
 
-    }
-
-    private static sumValues(...values) {
-        let
-            sum: number = 0
-
-        values.forEach(
-            (value) => {
-                sum += value;
-            }
-        );
-
-        return sum;
     }
 
     private hoursContainedInMinutes(minutes: number = 0): number {
