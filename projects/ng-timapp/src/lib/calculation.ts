@@ -17,22 +17,23 @@ export class Calculation {
     calculateHours(additionalHours: number = 0): number {
         this.hours += additionalHours;
 
-        return this.hours += this.hoursContainedInMinutes(this.absMinutes);
+        return Math.abs(this.hours += this.hoursContainedInMinutes(this.absMinutes));
     }
 
     calculateMinutes(additionalMinutes: number = 0): number {
         this.absMinutes += additionalMinutes;
 
         this.absMinutes += this.minutesContainedInSeconds(this.absSeconds);
-        return this.absMinutes -
-            (this.hoursContainedInMinutes(this.absMinutes) * 60);
+
+        return Math.abs(this.absMinutes -
+            (this.hoursContainedInMinutes(this.absMinutes) * 60));
     }
 
     calculateSeconds(additionalSeconds: number = 0): number {
         this.absSeconds += additionalSeconds;
 
-        return this.absSeconds -
-            (this.minutesContainedInSeconds(this.absSeconds) * 60);
+        return Math.abs(this.absSeconds -
+            (this.minutesContainedInSeconds(this.absSeconds) * 60));
     }
 
     sum(...time): Object {
