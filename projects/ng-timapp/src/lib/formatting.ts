@@ -1,27 +1,75 @@
 export class Formatting {
 
-    static formatHours(hours: number): string {
-        if (hours < 10) {
-            return `0${hours}`;
+    static formatHours(hours: number, asAbsolute: boolean = true): string {
+        const
+            absTime = Math.abs(hours);
+
+        if (hours < 0) {
+            if (asAbsolute && absTime < 10) {
+                return `0${absTime}`;
+            } else if (asAbsolute && absTime >= 10) {
+                return `${absTime}`;
+            // not to return as absolute
+            } else if (absTime < 10) {
+                return `-0${absTime}`;
+            }
+
+            return `-${absTime}`;
         }
 
-        return `${hours}`;
+        if (absTime < 10) {
+            return `0${absTime}`;
+        }
+
+        return `${absTime}`;
+
     }
 
-    static formatMinutes(minutes: number): string {
-        if (minutes < 10) {
-            return `0${minutes}`;
+    static formatMinutes(minutes: number, asAbsolute: boolean = true): string {
+        const
+            absTime = Math.abs(minutes);
+
+        if (minutes < 0) {
+            if (asAbsolute && absTime < 10) {
+                return `0${absTime}`;
+            } else if (asAbsolute && absTime >= 10) {
+                return `${absTime}`;
+            } else if (absTime < 10) {
+                return `-0${absTime}`;
+            }
+
+            return `-${absTime}`;
         }
 
-        return `${minutes}`;
+        if (absTime < 10) {
+            return `0${absTime}`;
+        }
+
+        return `${absTime}`;
+
     }
 
-    static formatSerconds(seconds: number): string {
-        if (seconds < 10) {
-            return `0${seconds}`;
+    static formatSerconds(seconds: number, asAbsolute: boolean = true): string {
+        const
+            absTime = Math.abs(seconds);
+
+        if (seconds < 0) {
+            if (asAbsolute && absTime < 10) {
+                return `0${absTime}`;
+            } else if (asAbsolute && absTime >= 10) {
+                return `${absTime}`;
+            } else if (absTime < 10) {
+                return `-0${absTime}`;
+            }
+
+            return `-${absTime}`;
         }
 
-        return `${seconds}`;
+        if (absTime < 10) {
+            return `0${absTime}`;
+        }
+
+        return `${absTime}`;
     }
 
 }

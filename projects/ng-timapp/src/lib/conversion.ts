@@ -28,15 +28,15 @@ export class Conversion {
         return this.seconds;
     }
 
-    getFormatedHours(): string {
+    getFormatedHours(asAbsolute: boolean = true): string {
         return Formatting.formatHours(this.hours);
     }
 
-    getFormatedMinutes(): string {
-        return Formatting.formatMinutes(this.minutes);
+    getFormatedMinutes(asAbsolute: boolean = true): string {
+        return Formatting.formatMinutes(this.minutes, asAbsolute);
     }
 
-    getFormatedSerconds(): string {
+    getFormatedSerconds(asAbsolute: boolean = true): string {
         return Formatting.formatSerconds(this.seconds);
     }
 

@@ -1,14 +1,14 @@
 export class Calculation {
 
-    private absSeconds: number;
-    private absMinutes: number;
+    private givenSeconds: number;
+    private givenMinutes: number;
     private hours: number;
     private minutes: number;
     private seconds: number;
 
     constructor(attrs: Object = {}) {
-        this.absSeconds = parseInt(attrs['seconds']) || 0;
-        this.absMinutes = parseInt(attrs['minutes']) || 0;
+        this.givenSeconds = parseInt(attrs['seconds']) || 0;
+        this.givenMinutes = parseInt(attrs['minutes']) || 0;
         this.hours = parseInt(attrs['hours']) || 0;
         this.minutes = 0;
         this.seconds = 0;
@@ -17,23 +17,23 @@ export class Calculation {
     calculateHours(additionalHours: number = 0): number {
         this.hours += additionalHours;
 
-        return Math.abs(this.hours += this.hoursContainedInMinutes(this.absMinutes));
+        return this.hours += this.hoursContainedInMinutes(this.givenMinutes);
     }
 
     calculateMinutes(additionalMinutes: number = 0): number {
-        this.absMinutes += additionalMinutes;
+        this.givenMinutes += additionalMinutes;
 
-        this.absMinutes += this.minutesContainedInSeconds(this.absSeconds);
+        this.givenMinutes += this.minutesContainedInSeconds(this.givenSeconds);
 
-        return Math.abs(this.absMinutes -
-            (this.hoursContainedInMinutes(this.absMinutes) * 60));
+        return this.givenMinutes -
+            (this.hoursContainedInMinutes(this.givenMinutes) * 60);
     }
 
     calculateSeconds(additionalSeconds: number = 0): number {
-        this.absSeconds += additionalSeconds;
+        this.givenSeconds += additionalSeconds;
 
-        return Math.abs(this.absSeconds -
-            (this.minutesContainedInSeconds(this.absSeconds) * 60));
+        return this.givenSeconds -
+            (this.minutesContainedInSeconds(this.givenSeconds) * 60);
     }
 
     sum(...time): Object {
@@ -60,8 +60,8 @@ export class Calculation {
                 this.hours = this.calculateHours(o['hours']);
 
                 // resets absolute time values
-                this.absMinutes = this.minutes;
-                this.absSeconds = this.seconds;
+                this.givenMinutes = this.minutes;
+                this.givenSeconds = this.seconds;
             }
         );
 
