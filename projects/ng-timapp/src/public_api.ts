@@ -1,4 +1,4 @@
 import * as NgTimapp from './lib';
 export { NgTimapp };
 
-export { NgTimappModule } from './lib/module';
+// export { NgTimappModule } from './lib';
