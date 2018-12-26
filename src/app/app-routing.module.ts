@@ -4,13 +4,13 @@ import {
     RouterModule
 } from '@angular/router';
 
-import { ExampleComponent } from './example/component';
+import { AppComponent } from './app.component';
 
 
 const appRoutes: Routes = [
     {
         path: '',
-        component: ExampleComponent
+        component: AppComponent
     }
 ];
 

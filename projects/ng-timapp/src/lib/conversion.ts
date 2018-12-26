@@ -42,9 +42,9 @@ export class Conversion {
 
     private calculate() {
         // this order isn't important
-        this.seconds = this.calculation.calculateSeconds();
-        this.minutes = this.calculation.calculateMinutes();
-        this.hours = this.calculation.calculateHours();
+        this.seconds = this.calculation.calculatesSeconds();
+        this.minutes = this.calculation.calculatesMinutes();
+        this.hours = this.calculation.calculatesHours();
     }
 
 }
