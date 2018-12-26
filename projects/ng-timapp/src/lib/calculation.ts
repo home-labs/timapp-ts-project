@@ -72,6 +72,23 @@ export class Calculation {
 
     }
 
+    difference(...time): Object {
+
+        const
+            clone = this.getClone();
+
+        let
+            minutes: number = 0,
+            seconds: number = 0;
+
+        return {
+            hours: clone.hours,
+            minutes: minutes,
+            seconds: seconds
+        }
+
+    }
+
     private getClone(): Calculation {
         return Object.assign(new Calculation(), this);
     }
