@@ -16,13 +16,13 @@ export class AppComponent {
     private diffCalc: NgTimapp.Calculation;
 
     constructor() {
-        // this.conversor = new NgTimapp.Conversion(
-        //     {
-        //         // minutes: '99'
-        //         // minutes: 56753
-        //         seconds: 9734
-        //     }
-        // );
+        this.conversor = new NgTimapp.Conversion(
+            {
+                hours: 1,
+                minutes: 1,
+                seconds: 3600
+            }
+        );
 
         this.sumCalc = new NgTimapp.Calculation(
             {
@@ -44,9 +44,11 @@ export class AppComponent {
     ngOnInit() {
         // console.log(`${this.conversor.getFormattedHours()}:${this.conversor.getFormattedMinutes()}:${this.conversor.getFormattedSerconds()}`);
 
-        console.log('sum: ', this.sumCalc.sum({ seconds: 30 }, { seconds: 31 }));
+        let
+            sum: NgTimapp.Calculation = this.sumCalc.sum({ seconds: 61 });
 
-        // console.log('difference: ', this.diffCalc.difference({ seconds: 30 }));
+        console.log(`h: ${this.sumCalc.getHours()}, min: ${this.sumCalc.getMinutes()}, sec: ${this.sumCalc.getSeconds()}`);
+        console.log(`h: ${sum.getHours()}, min: ${sum.getMinutes()}, sec: ${sum.getSeconds()}`);
     }
 
 }

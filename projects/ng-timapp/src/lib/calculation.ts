@@ -25,7 +25,7 @@ export class Calculation {
             (this.minutesContainedInSeconds(this.seconds) * 60);
     }
 
-    sum(...time): Object {
+    sum(attrs: Object = {}): Calculation {
 
         const
             clone = this.getClone();
@@ -34,42 +34,32 @@ export class Calculation {
             minutes: number = 0,
             seconds: number = 0;
 
-        time.forEach(
-            (o: Object) => {
-
-                // resolve seconds
-                if (!o['seconds']) {
-                    o['seconds'] = 0;
-                }
-                clone.seconds += o['seconds'];
-                seconds = clone.calculatesSeconds();
-
-                // resolve minutes
-                if (!o['minutes']) {
-                    o['minutes'] = 0;
-                }
-                clone.minutes += o['minutes'];
-                minutes = clone.calculatesMinutes();
-
-                // resolve hours
-                if (!o['hours']) {
-                    o['hours'] = 0;
-                }
-                clone.hours += o['hours'];
-                clone.hours = clone.calculatesHours();
-
-                // resets to calculated values
-                clone.minutes = minutes;
-                clone.seconds = seconds;
-            }
-        );
-
-        return {
-            hours: clone.hours,
-            minutes: minutes,
-            seconds: seconds
+        // resattrsolve seconds
+        if (!attrs['seconds']) {
+            attrs['seconds'] = 0;
         }
+        clone.seconds += attrs['seconds'];
+        seconds = clone.calculatesSeconds();
 
+        // resolve minutes
+        if (!attrs['minutes']) {
+            attrs['minutes'] = 0;
+        }
+        clone.minutes += attrs['minutes'];
+        minutes = clone.calculatesMinutes();
+
+        // resolve hours
+        if (!attrs['hours']) {
+            attrs['hours'] = 0;
+        }
+        clone.hours += attrs['hours'];
+
+        // resets to calculated values
+        clone.hours = clone.calculatesHours();
+        clone.minutes = minutes;
+        clone.seconds = seconds;
+
+        return clone;
     }
 
     difference(...time): Object {
@@ -87,6 +77,18 @@ export class Calculation {
             seconds: seconds
         }
 
+    }
+
+    getHours() {
+        return this.hours;
+    }
+
+    getMinutes() {
+        return this.minutes;
+    }
+
+    getSeconds() {
+        return this.seconds;
     }
 
     private getClone(): Calculation {
