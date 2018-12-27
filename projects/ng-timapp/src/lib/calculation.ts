@@ -15,6 +15,7 @@ export class Calculation {
     }
 
     calculatesMinutes(): number {
+        this.minutes += this.minutesContainedInSeconds(this.seconds);
         return this.minutes -
             (this.hoursContainedInMinutes(this.minutes) * 60);
     }
@@ -48,7 +49,6 @@ export class Calculation {
                     o['minutes'] = 0;
                 }
                 clone.minutes += o['minutes'];
-                clone.minutes += this.minutesContainedInSeconds(clone.seconds);
                 minutes = clone.calculatesMinutes();
 
                 // resolve hours

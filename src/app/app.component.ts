@@ -24,29 +24,29 @@ export class AppComponent {
         //     }
         // );
 
-        // this.sumCalc = new NgTimapp.Calculation(
-        //     {
-        //         hours: 0,
-        //         minutes: 59,
-        //         seconds: 61
-        //     }
-        // );
-
-        this.diffCalc = new NgTimapp.Calculation(
+        this.sumCalc = new NgTimapp.Calculation(
             {
                 hours: 0,
-                minutes: 0,
-                seconds: 0
+                minutes: 59,
+                seconds: 61
             }
         );
+
+        // this.diffCalc = new NgTimapp.Calculation(
+        //     {
+        //         hours: 0,
+        //         minutes: 0,
+        //         seconds: 0
+        //     }
+        // );
     }
 
     ngOnInit() {
         // console.log(`${this.conversor.getFormattedHours()}:${this.conversor.getFormattedMinutes()}:${this.conversor.getFormattedSerconds()}`);
 
-        // console.log('sum: ', this.sumCalc.sum({ seconds: 30 }, { seconds: 31 }));
+        console.log('sum: ', this.sumCalc.sum({ seconds: 30 }, { seconds: 31 }));
 
-        console.log('difference: ', this.diffCalc.difference({ seconds: 30 }));
+        // console.log('difference: ', this.diffCalc.difference({ seconds: 30 }));
     }
 
 }
