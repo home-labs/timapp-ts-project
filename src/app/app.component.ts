@@ -74,7 +74,7 @@ export class AppComponent {
                 // }
                 {
                     hours: 1,
-                    minutes: 1,
+                    minutes: 0,
                     seconds: 10
                 }
             );
