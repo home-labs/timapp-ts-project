@@ -10,38 +10,26 @@ export class Conversion {
 
     private calculation: Calculation;
 
-    constructor(attrs: Object = {}) {
+    constructor(attrs: Object) {
         this.calculation = new Calculation(attrs);
 
         this.calculate();
     }
 
-    getHours(): number {
-        return this.hours;
+    getHours(asAbsolute: boolean = true): string {
+        return Formatting.formatHours(this.hours, asAbsolute);
     }
 
-    getMinutes(): number {
-        return this.minutes;
-    }
-
-    getSeconds(): number {
-        return this.seconds;
-    }
-
-    getFormattedHours(asAbsolute: boolean = true): string {
-        return Formatting.formatHours(this.hours);
-    }
-
-    getFormattedMinutes(asAbsolute: boolean = true): string {
+    getMinutes(asAbsolute: boolean = true): string {
         return Formatting.formatMinutes(this.minutes, asAbsolute);
     }
 
-    getFormattedSerconds(asAbsolute: boolean = true): string {
-        return Formatting.formatSerconds(this.seconds);
+    getSeconds(asAbsolute: boolean = true): string {
+        return Formatting.formatSerconds(this.seconds, asAbsolute);
     }
 
     private calculate() {
-        // this order isn't important
+        // the order isn't important
         this.seconds = this.calculation.calculatesSeconds();
         this.minutes = this.calculation.calculatesMinutes();
         this.hours = this.calculation.calculatesHours();

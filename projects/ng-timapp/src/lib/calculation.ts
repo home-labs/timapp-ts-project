@@ -1,13 +1,24 @@
+import { Formatting } from './formatting';
+
+
 export class Calculation {
 
     private seconds: number;
     private minutes: number;
     private hours: number;
 
-    constructor(attrs: Object = {}) {
-        this.seconds = parseInt(attrs['seconds']) || 0;
-        this.minutes = parseInt(attrs['minutes']) || 0;
-        this.hours = parseInt(attrs['hours']) || 0;
+    private differenceBetweenHours: number;
+    private differenceBetweenMinutes: number;
+    private differenceBetweenSeconds: number;
+
+    constructor(timeAsHashTable: Object) {
+        this.seconds = parseInt(timeAsHashTable['seconds'] || '0');
+        this.minutes = parseInt(timeAsHashTable['minutes'] || '0') ;
+        this.hours = parseInt(timeAsHashTable['hours'] || '0');
+
+        this.differenceBetweenHours = 0;
+        this.differenceBetweenMinutes = 0;
+        this.differenceBetweenSeconds = 0;
     }
 
     calculatesHours(): number {
@@ -25,7 +36,7 @@ export class Calculation {
             (this.minutesContainedInSeconds(this.seconds) * 60);
     }
 
-    sum(attrs: Object = {}): Calculation {
+    sum(timeAsHashTable: Object = {}): Calculation {
 
         const
             clone = this.getClone();
@@ -34,25 +45,25 @@ export class Calculation {
             minutes: number = 0,
             seconds: number = 0;
 
-        // resattrsolve seconds
-        if (!attrs['seconds']) {
-            attrs['seconds'] = 0;
+        // restimeAsHashTableolve seconds
+        if (!timeAsHashTable['seconds']) {
+            timeAsHashTable['seconds'] = 0;
         }
-        clone.seconds += attrs['seconds'];
+        clone.seconds += timeAsHashTable['seconds'];
         seconds = clone.calculatesSeconds();
 
         // resolve minutes
-        if (!attrs['minutes']) {
-            attrs['minutes'] = 0;
+        if (!timeAsHashTable['minutes']) {
+            timeAsHashTable['minutes'] = 0;
         }
-        clone.minutes += attrs['minutes'];
+        clone.minutes += timeAsHashTable['minutes'];
         minutes = clone.calculatesMinutes();
 
         // resolve hours
-        if (!attrs['hours']) {
-            attrs['hours'] = 0;
+        if (!timeAsHashTable['hours']) {
+            timeAsHashTable['hours'] = 0;
         }
-        clone.hours += attrs['hours'];
+        clone.hours += timeAsHashTable['hours'];
 
         // resets to calculated values
         clone.hours = clone.calculatesHours();
@@ -62,37 +73,77 @@ export class Calculation {
         return clone;
     }
 
-    difference(...time): Object {
+    difference(elapsedTimeAsHashTable: Object): Calculation {
 
         const
-            clone = this.getClone();
+            clone = this.getClone(),
+            calculation = new Calculation(elapsedTimeAsHashTable),
+            resolvedHours: number = clone.calculatesHours(),
+            resolvedMinutes: number = clone.calculatesMinutes(),
+            resolvedSeconds: number = clone.calculatesSeconds(),
+            elapsedResolvedHours: number = calculation.calculatesHours(),
+            elapsedResolvedMinutes: number = calculation.calculatesMinutes(),
+            elapsedResolvedSeconds: number = calculation.calculatesSeconds(),
+            differenceBetweenSeconds: number = elapsedResolvedSeconds -
+                resolvedSeconds,
+            differenceBetweenMinutes: number = elapsedResolvedMinutes -
+                resolvedMinutes,
+            differenceBetweenHours: number = elapsedResolvedHours - resolvedHours;
 
         let
-            minutes: number = 0,
-            seconds: number = 0;
+            realDifferenceBetweenHours: number = differenceBetweenHours,
+            realDifferenceBetweenMinutes: number = differenceBetweenMinutes,
+            realDifferenceBetweenSeconds: number = differenceBetweenSeconds;
 
-        return {
-            hours: clone.hours,
-            minutes: minutes,
-            seconds: seconds
+        if (differenceBetweenHours < 0) {
+            realDifferenceBetweenHours = 24 - Math.abs(differenceBetweenHours);
         }
 
+        if (differenceBetweenMinutes < 0) {
+            realDifferenceBetweenMinutes = 60 - Math.abs(differenceBetweenMinutes);
+
+            realDifferenceBetweenHours -= 1;
+        }
+
+        if (differenceBetweenSeconds < 0) {
+            realDifferenceBetweenSeconds = 60 - Math.abs(differenceBetweenSeconds);
+
+            realDifferenceBetweenMinutes -= 1;
+        }
+
+        clone.differenceBetweenHours = realDifferenceBetweenHours;
+        clone.differenceBetweenMinutes = realDifferenceBetweenMinutes;
+        clone.differenceBetweenSeconds = realDifferenceBetweenSeconds;
+
+        return clone;
     }
 
-    getHours() {
-        return this.hours;
+    getHours(): string {
+        return Formatting.formatHours(this.hours);
     }
 
-    getMinutes() {
-        return this.minutes;
+    getMinutes(): string {
+        return Formatting.formatMinutes(this.minutes);
     }
 
-    getSeconds() {
-        return this.seconds;
+    getSeconds(): string {
+        return Formatting.formatSerconds(this.seconds);
+    }
+
+    getDifferenceBetweenHours(): string {
+        return Formatting.formatHours(this.differenceBetweenHours);
+    }
+
+    getDifferenceBetweenMinutes(): string {
+        return Formatting.formatMinutes(this.differenceBetweenMinutes);
+    }
+
+    getDifferenceBetweenSeconds(): string {
+        return Formatting.formatSerconds(this.differenceBetweenSeconds);
     }
 
     private getClone(): Calculation {
-        return Object.assign(new Calculation(), this);
+        return Object.assign(new Calculation({}), this);
     }
 
     private hoursContainedInMinutes(minutes: number = 0): number {

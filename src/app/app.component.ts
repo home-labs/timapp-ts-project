@@ -32,23 +32,54 @@ export class AppComponent {
             }
         );
 
-        // this.diffCalc = new NgTimapp.Calculation(
-        //     {
-        //         hours: 0,
-        //         minutes: 0,
-        //         seconds: 0
-        //     }
-        // );
+        this.diffCalc = new NgTimapp.Calculation(
+            // {
+            //     hours: 0,
+            //     minutes: 1,
+            //     seconds: 10
+            // }
+            // {
+            //     hours: 0,
+            //     minutes: 1,
+            //     seconds: 15
+            // }
+            {
+                hours: 22,
+                minutes: 58,
+                seconds: 15
+            }
+        );
     }
 
     ngOnInit() {
-        // console.log(`${this.conversor.getFormattedHours()}:${this.conversor.getFormattedMinutes()}:${this.conversor.getFormattedSerconds()}`);
+        // console.log(`${this.conversor.getHours()}:${this.conversor.getMinutes()}:${this.conversor.getSerconds()}`);
+
+        // let
+        //     sum: NgTimapp.Calculation = this.sumCalc.sum({ seconds: 61 });
+
+        // console.log(`h: ${this.sumCalc.getHours()}, min: ${this.sumCalc.getMinutes()}, sec: ${this.sumCalc.getSeconds()}`);
+        // console.log(`h: ${sum.getHours()}, min: ${sum.getMinutes()}, sec: ${sum.getSeconds()}`);
 
         let
-            sum: NgTimapp.Calculation = this.sumCalc.sum({ seconds: 61 });
+            difference: NgTimapp.Calculation = this.diffCalc.difference(
+                // {
+                //     hours: 1,
+                //     minutes: 3,
+                //     seconds: 15
+                // }
+                // {
+                //     hours: 1,
+                //     minutes: 2,
+                //     seconds: 10
+                // }
+                {
+                    hours: 1,
+                    minutes: 1,
+                    seconds: 10
+                }
+            );
 
-        console.log(`h: ${this.sumCalc.getHours()}, min: ${this.sumCalc.getMinutes()}, sec: ${this.sumCalc.getSeconds()}`);
-        console.log(`h: ${sum.getHours()}, min: ${sum.getMinutes()}, sec: ${sum.getSeconds()}`);
+        console.log(`${difference.getDifferenceBetweenHours()}:${difference.getDifferenceBetweenMinutes()}:${difference.getDifferenceBetweenSeconds()}`);
     }
 
 }
