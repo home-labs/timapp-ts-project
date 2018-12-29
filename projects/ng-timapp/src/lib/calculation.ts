@@ -39,7 +39,7 @@ export class Calculation  implements ClonablePrototypeInterface {
                 .getSeconds())) * 60);
     }
 
-    sum(timeAsHashTable: Object): Calculation {
+    calculatesSum(timeAsHashTable: Object): Calculation {
 
         const
             clone = this.getClone();
