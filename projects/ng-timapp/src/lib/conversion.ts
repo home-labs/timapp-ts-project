@@ -1,38 +1,39 @@
 import { Calculation } from './calculation';
-import { Formatting } from './formatting';
+import { Time } from './time';
 
 
 export class Conversion {
 
-    private hours: number;
-    private minutes: number;
-    private seconds: number;
-
     private calculation: Calculation;
+    private time: Time;
 
     constructor(attrs: Object) {
         this.calculation = new Calculation(attrs);
 
-        this.calculate();
+        this.converts();
     }
 
     getHours(asAbsolute: boolean = true): string {
-        return Formatting.formatHours(this.hours, asAbsolute);
+        return this.time.getHours(asAbsolute);
     }
 
     getMinutes(asAbsolute: boolean = true): string {
-        return Formatting.formatMinutes(this.minutes, asAbsolute);
+        return this.time.getMinutes(asAbsolute);
     }
 
     getSeconds(asAbsolute: boolean = true): string {
-        return Formatting.formatSerconds(this.seconds, asAbsolute);
+        return this.time.getSeconds(asAbsolute);
     }
 
-    private calculate() {
-        // the order isn't important
-        this.seconds = this.calculation.calculatesSeconds();
-        this.minutes = this.calculation.calculatesMinutes();
-        this.hours = this.calculation.calculatesHours();
+    private converts() {
+
+        this.time = new Time(
+            {
+                hours: this.calculation.calculatesHours(),
+                minutes: this.calculation.calculatesMinutes(),
+                seconds: this.calculation.calculatesSeconds()
+            }
+        );
     }
 
 }

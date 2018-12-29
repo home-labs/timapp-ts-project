@@ -18,17 +18,17 @@ export class AppComponent {
     constructor() {
         this.conversor = new NgTimapp.Conversion(
             {
-                hours: 1,
-                minutes: 1,
-                seconds: 3600
+                hours: 0,
+                minutes: 60,
+                seconds: 61
             }
         );
 
         this.sumCalc = new NgTimapp.Calculation(
             {
                 hours: 0,
-                minutes: 59,
-                seconds: 61
+                minutes: 30,
+                seconds: 31
             }
         );
 
@@ -52,16 +52,21 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        // console.log(`${this.conversor.getHours()}:${this.conversor.getMinutes()}:${this.conversor.getSerconds()}`);
+        // console.log(`${this.conversor.getHours()}:${this.conversor.getMinutes()}:${this.conversor.getSeconds()}`);
 
         // let
-        //     sum: NgTimapp.Calculation = this.sumCalc.sum({ seconds: 61 });
+        //     sum: NgTimapp.Calculation = this.sumCalc.sum(
+        //         {
+        //             minutes: 30,
+        //             seconds: 30
+        //         }
+        //     );
 
-        // console.log(`h: ${this.sumCalc.getHours()}, min: ${this.sumCalc.getMinutes()}, sec: ${this.sumCalc.getSeconds()}`);
-        // console.log(`h: ${sum.getHours()}, min: ${sum.getMinutes()}, sec: ${sum.getSeconds()}`);
+        // console.log(`${this.sumCalc.getHours()}:${this.sumCalc.getMinutes()}:${this.sumCalc.getSeconds()}`);
+        // console.log(`${sum.getHours()}:${sum.getMinutes()}:${sum.getSeconds()}`);
 
         let
-            difference: NgTimapp.Calculation = this.diffCalc.difference(
+            difference: NgTimapp.Calculation = this.diffCalc.calculatesElapsedTime(
                 // {
                 //     hours: 1,
                 //     minutes: 3,
@@ -79,7 +84,7 @@ export class AppComponent {
                 }
             );
 
-        console.log(`${difference.getDifferenceBetweenHours()}:${difference.getDifferenceBetweenMinutes()}:${difference.getDifferenceBetweenSeconds()}`);
+        console.log(`${difference.getElapsedHours()}:${difference.getElapsedMinutes()}:${difference.getElapsedSeconds()}`);
     }
 
 }

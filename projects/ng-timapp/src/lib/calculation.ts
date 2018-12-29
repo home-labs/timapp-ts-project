@@ -1,40 +1,42 @@
+import { Time } from './time';
 import { Formatting } from './formatting';
+import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
 
-export class Calculation {
+export class Calculation  implements ClonablePrototypeInterface {
 
-    private seconds: number;
-    private minutes: number;
-    private hours: number;
+    private time: Time;
 
-    private differenceBetweenHours: number;
-    private differenceBetweenMinutes: number;
-    private differenceBetweenSeconds: number;
+    private elapsedHours: number;
+    private elapsedMinutes: number;
+    private elapsedSeconds: number;
 
     constructor(timeAsHashTable: Object) {
-        this.seconds = Number.parseInt(timeAsHashTable['seconds'] || '0');
-        this.minutes = Number.parseInt(timeAsHashTable['minutes'] || '0') ;
-        this.hours = Number.parseInt(timeAsHashTable['hours'] || '0');
+        this.time = new Time(timeAsHashTable);
 
-        this.differenceBetweenHours = 0;
-        this.differenceBetweenMinutes = 0;
-        this.differenceBetweenSeconds = 0;
+        this.elapsedHours = 0;
+        this.elapsedMinutes = 0;
+        this.elapsedSeconds = 0;
     }
 
     calculatesHours(): number {
-        return this.hours + this.hoursContainedInMinutes(this.minutes);
+        return Number.parseInt(this.time.getHours()) + this
+            .hoursContainedInMinutes(Number.parseInt(this.time.getMinutes()));
     }
 
     calculatesMinutes(): number {
-        this.minutes += this.minutesContainedInSeconds(this.seconds);
+        this.time.addsMinutes(this.minutesContainedInSeconds(Number
+            .parseInt(this.time.getSeconds())));
 
-        return this.minutes -
-            (this.hoursContainedInMinutes(this.minutes) * 60);
+        return Number.parseInt(this.time.getMinutes()) - (this
+            .hoursContainedInMinutes(Number.parseInt(this.time
+                .getMinutes())) * 60);
     }
 
     calculatesSeconds(): number {
-        return this.seconds -
-            (this.minutesContainedInSeconds(this.seconds) * 60);
+        return Number.parseInt(this.time.getSeconds()) - (this
+            .minutesContainedInSeconds(Number.parseInt(this.time
+                .getSeconds())) * 60);
     }
 
     sum(timeAsHashTable: Object = {}): Calculation {
@@ -42,108 +44,109 @@ export class Calculation {
         const
             clone = this.getClone();
 
-        let
-            minutes: number = 0,
-            seconds: number = 0;
+        clone.time = this.time.getClone();
 
-        // restimeAsHashTableolve seconds
+        let
+            seconds: number = 0,
+            minutes: number = 0;
+
+        // resolve seconds
         if (!timeAsHashTable['seconds']) {
             timeAsHashTable['seconds'] = 0;
         }
-        clone.seconds += Number.parseInt(timeAsHashTable['seconds']);
+        clone.time.addsSeconds(Number.parseInt(timeAsHashTable['seconds']));
         seconds = clone.calculatesSeconds();
 
         // resolve minutes
         if (!timeAsHashTable['minutes']) {
             timeAsHashTable['minutes'] = 0;
         }
-        clone.minutes += Number.parseInt(timeAsHashTable['minutes']);
+        clone.time.addsMinutes(Number.parseInt(timeAsHashTable['minutes']));
         minutes = clone.calculatesMinutes();
 
         // resolve hours
         if (!timeAsHashTable['hours']) {
             timeAsHashTable['hours'] = 0;
         }
-        clone.hours += Number.parseInt(timeAsHashTable['hours']);
+        clone.time.addsHours(Number.parseInt(timeAsHashTable['hours']));
 
-        // resets to calculated values
-        clone.hours = clone.calculatesHours();
-        clone.minutes = minutes;
-        clone.seconds = seconds;
+        clone.time.resetHours(clone.calculatesHours());
+        clone.time.resetMinutes(minutes);
+        clone.time.resetSeconds(seconds);
 
         return clone;
     }
 
-    difference(elapsedTimeAsHashTable: Object): Calculation {
+    calculatesElapsedTime(elapsedTimeAsHashTable: Object): Calculation {
 
         const
             clone = this.getClone(),
             calculation = new Calculation(elapsedTimeAsHashTable),
-            resolvedHours: number = clone.calculatesHours(),
-            resolvedMinutes: number = clone.calculatesMinutes(),
-            resolvedSeconds: number = clone.calculatesSeconds(),
+            calculatedHours: number = clone.calculatesHours(),
+            calculatedMinutes: number = clone.calculatesMinutes(),
+            calculatedSeconds: number = clone.calculatesSeconds(),
             elapsedResolvedHours: number = calculation.calculatesHours(),
             elapsedResolvedMinutes: number = calculation.calculatesMinutes(),
             elapsedResolvedSeconds: number = calculation.calculatesSeconds(),
-            differenceBetweenSeconds: number = elapsedResolvedSeconds -
-                resolvedSeconds,
-            differenceBetweenMinutes: number = elapsedResolvedMinutes -
-                resolvedMinutes,
-            differenceBetweenHours: number = elapsedResolvedHours - resolvedHours;
+            elapsedSeconds: number = elapsedResolvedSeconds -
+                calculatedSeconds,
+            elapsedMinutes: number = elapsedResolvedMinutes -
+                calculatedMinutes,
+            elapsedHours: number = elapsedResolvedHours - calculatedHours;
 
         let
-            realDifferenceBetweenHours: number = differenceBetweenHours,
-            realDifferenceBetweenMinutes: number = differenceBetweenMinutes,
-            realDifferenceBetweenSeconds: number = differenceBetweenSeconds;
+            realElapsedHours: number = elapsedHours,
+            realElapsedMinutes: number = elapsedMinutes,
+            realElapsedSeconds: number = elapsedSeconds;
 
-        if (differenceBetweenHours < 0) {
-            realDifferenceBetweenHours = 24 - Math.abs(differenceBetweenHours);
+        if (elapsedHours < 0) {
+            realElapsedHours = 24 - Math.abs(elapsedHours);
         }
 
-        if (differenceBetweenMinutes < 0) {
-            realDifferenceBetweenMinutes = 60 - Math.abs(differenceBetweenMinutes);
+        if (elapsedMinutes < 0) {
+            realElapsedMinutes = 60 - Math.abs(elapsedMinutes);
 
-            realDifferenceBetweenHours -= 1;
+            realElapsedHours -= 1;
         }
 
-        if (differenceBetweenSeconds < 0) {
-            realDifferenceBetweenSeconds = 60 - Math.abs(differenceBetweenSeconds);
+        if (elapsedSeconds < 0) {
+            realElapsedSeconds = 60 - Math.abs(elapsedSeconds);
 
-            realDifferenceBetweenMinutes -= 1;
+            realElapsedMinutes -= 1;
         }
 
-        clone.differenceBetweenHours = realDifferenceBetweenHours;
-        clone.differenceBetweenMinutes = realDifferenceBetweenMinutes;
-        clone.differenceBetweenSeconds = realDifferenceBetweenSeconds;
+        clone.elapsedHours = realElapsedHours;
+        clone.elapsedMinutes = realElapsedMinutes;
+        clone.elapsedSeconds = realElapsedSeconds;
 
         return clone;
     }
 
-    getHours(): string {
-        return Formatting.formatHours(this.hours);
+    getHours(asAbsolute: boolean = true) {
+        return this.time.getHours(asAbsolute);
     }
 
-    getMinutes(): string {
-        return Formatting.formatMinutes(this.minutes);
+    getMinutes(asAbsolute: boolean = true) {
+        return this.time.getMinutes(asAbsolute);
     }
 
-    getSeconds(): string {
-        return Formatting.formatSerconds(this.seconds);
+    getSeconds(asAbsolute: boolean = true) {
+        return this.time.getSeconds(asAbsolute);
     }
 
-    getDifferenceBetweenHours(): string {
-        return Formatting.formatHours(this.differenceBetweenHours);
+    getElapsedHours(): string {
+        return Formatting.formatHours(this.elapsedHours, false);
     }
 
-    getDifferenceBetweenMinutes(): string {
-        return Formatting.formatMinutes(this.differenceBetweenMinutes);
+    getElapsedMinutes(): string {
+        return Formatting.formatMinutes(this.elapsedMinutes, false);
     }
 
-    getDifferenceBetweenSeconds(): string {
-        return Formatting.formatSerconds(this.differenceBetweenSeconds);
+    getElapsedSeconds(): string {
+        return Formatting.formatSerconds(this.elapsedSeconds, false);
     }
 
-    private getClone(): Calculation {
+    getClone(): Calculation {
         return Object.assign(new Calculation({}), this);
     }
 
