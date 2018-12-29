@@ -8,7 +8,7 @@ export class Time implements ClonablePrototypeInterface {
     private minutes: number;
     private seconds: number;
 
-    constructor(timeAsHashTable: Object) {
+    constructor(timeAsHashTable: Object = {}) {
         this.hours = Number.parseInt(timeAsHashTable['hours'] || '0');
         this.minutes = Number.parseInt(timeAsHashTable['minutes'] || '0');
         this.seconds = Number.parseInt(timeAsHashTable['seconds'] || '0');
