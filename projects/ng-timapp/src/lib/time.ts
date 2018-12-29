@@ -2,7 +2,7 @@ import { Formatting } from './formatting';
 import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
 
-export class Time implements ClonablePrototypeInterface {
+export class Time implements ClonablePrototypeInterface<Time> {
 
     private hours: number;
     private minutes: number;

@@ -3,7 +3,7 @@ import { Formatting } from './formatting';
 import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
 
-export class Calculation  implements ClonablePrototypeInterface {
+export class Calculation  implements ClonablePrototypeInterface<Calculation> {
 
     private time: Time;
 
@@ -17,6 +17,10 @@ export class Calculation  implements ClonablePrototypeInterface {
         this.elapsedHours = 0;
         this.elapsedMinutes = 0;
         this.elapsedSeconds = 0;
+    }
+
+    getClone(): Calculation {
+        return Object.assign(new Calculation({}), this);
     }
 
     calculatesHours(): number {
@@ -144,10 +148,6 @@ export class Calculation  implements ClonablePrototypeInterface {
 
     getElapsedSeconds(): string {
         return Formatting.formatSerconds(this.elapsedSeconds, false);
-    }
-
-    getClone(): Calculation {
-        return Object.assign(new Calculation({}), this);
     }
 
     private hoursContainedInMinutes(minutes: number = 0): number {

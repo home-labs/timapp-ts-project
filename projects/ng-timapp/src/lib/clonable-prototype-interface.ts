@@ -1,5 +1,5 @@
-export interface ClonablePrototypeInterface {
+export interface ClonablePrototypeInterface<T> {
 
-    getClone(): ClonablePrototypeInterface;
+    getClone(): T;
 
 }
