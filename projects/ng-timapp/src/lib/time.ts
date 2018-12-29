@@ -15,7 +15,7 @@ export class Time implements ClonablePrototypeInterface<Time> {
     }
 
     getClone(): Time {
-        return Object.assign(new Time({}), this);
+        return Object.assign(new Time(), this);
     }
 
     getHours(asAbsolute: boolean = true): string {
