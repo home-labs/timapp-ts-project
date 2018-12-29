@@ -12,9 +12,9 @@ export class Calculation {
     private differenceBetweenSeconds: number;
 
     constructor(timeAsHashTable: Object) {
-        this.seconds = parseInt(timeAsHashTable['seconds'] || '0');
-        this.minutes = parseInt(timeAsHashTable['minutes'] || '0') ;
-        this.hours = parseInt(timeAsHashTable['hours'] || '0');
+        this.seconds = Number.parseInt(timeAsHashTable['seconds'] || '0');
+        this.minutes = Number.parseInt(timeAsHashTable['minutes'] || '0') ;
+        this.hours = Number.parseInt(timeAsHashTable['hours'] || '0');
 
         this.differenceBetweenHours = 0;
         this.differenceBetweenMinutes = 0;
@@ -27,6 +27,7 @@ export class Calculation {
 
     calculatesMinutes(): number {
         this.minutes += this.minutesContainedInSeconds(this.seconds);
+
         return this.minutes -
             (this.hoursContainedInMinutes(this.minutes) * 60);
     }
@@ -49,21 +50,21 @@ export class Calculation {
         if (!timeAsHashTable['seconds']) {
             timeAsHashTable['seconds'] = 0;
         }
-        clone.seconds += timeAsHashTable['seconds'];
+        clone.seconds += Number.parseInt(timeAsHashTable['seconds']);
         seconds = clone.calculatesSeconds();
 
         // resolve minutes
         if (!timeAsHashTable['minutes']) {
             timeAsHashTable['minutes'] = 0;
         }
-        clone.minutes += timeAsHashTable['minutes'];
+        clone.minutes += Number.parseInt(timeAsHashTable['minutes']);
         minutes = clone.calculatesMinutes();
 
         // resolve hours
         if (!timeAsHashTable['hours']) {
             timeAsHashTable['hours'] = 0;
         }
-        clone.hours += timeAsHashTable['hours'];
+        clone.hours += Number.parseInt(timeAsHashTable['hours']);
 
         // resets to calculated values
         clone.hours = clone.calculatesHours();
