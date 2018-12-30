@@ -11,8 +11,8 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
     private elapsedMinutes: number;
     private elapsedSeconds: number;
 
-    constructor(timeAsHashTable: Object) {
-        this.time = new Time(timeAsHashTable);
+    constructor(time: Time) {
+        this.time = time;
 
         this.elapsedHours = 0;
         this.elapsedMinutes = 0;
@@ -20,26 +20,26 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
     }
 
     getClone(): Calculation {
-        return Object.assign(new Calculation({}), this);
+        return Object.assign(new Calculation(new Time({})), this);
     }
 
     calculatesHours(): number {
-        return Number.parseInt(this.time.getHours()) + this
-            .hoursContainedInMinutes(Number.parseInt(this.time.getMinutes()));
+        return Number.parseInt(this.getHours()) + this
+            .hoursContainedInMinutes(Number.parseInt(this.getMinutes()));
     }
 
     calculatesMinutes(): number {
         this.time.addsMinutes(this.minutesContainedInSeconds(Number
-            .parseInt(this.time.getSeconds())));
+            .parseInt(this.getSeconds())));
 
-        return Number.parseInt(this.time.getMinutes()) - (this
-            .hoursContainedInMinutes(Number.parseInt(this.time
+        return Number.parseInt(this.getMinutes()) - (this
+            .hoursContainedInMinutes(Number.parseInt(this
                 .getMinutes())) * 60);
     }
 
     calculatesSeconds(): number {
-        return Number.parseInt(this.time.getSeconds()) - (this
-            .minutesContainedInSeconds(Number.parseInt(this.time
+        return Number.parseInt(this.getSeconds()) - (this
+            .minutesContainedInSeconds(Number.parseInt(this
                 .getSeconds())) * 60);
     }
 
@@ -81,11 +81,11 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
         return clone;
     }
 
-    calculatesElapsedTime(elapsedTimeAsHashTable: Object): Calculation {
+    calculatesElapsedTime(elapsedTime: Time): Calculation {
 
         const
             clone = this.getClone(),
-            calculation = new Calculation(elapsedTimeAsHashTable),
+            calculation = new Calculation(elapsedTime),
             calculatedHours: number = clone.calculatesHours(),
             calculatedMinutes: number = clone.calculatesMinutes(),
             calculatedSeconds: number = clone.calculatesSeconds(),

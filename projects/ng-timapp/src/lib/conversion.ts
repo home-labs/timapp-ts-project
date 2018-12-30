@@ -7,8 +7,8 @@ export class Conversion {
     private calculation: Calculation;
     private time: Time;
 
-    constructor(attrs: Object) {
-        this.calculation = new Calculation(attrs);
+    constructor(time: Time) {
+        this.calculation = new Calculation(time);
 
         this.converts();
     }
