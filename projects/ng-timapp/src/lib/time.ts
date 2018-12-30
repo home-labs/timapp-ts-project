@@ -30,28 +30,28 @@ export class Time implements ClonablePrototypeInterface<Time> {
         return Formatting.formatSerconds(this.seconds, asAbsolute);
     }
 
-    addsHours(value: number) {
-        this.hours += value;
+    addsHours(value: number | string) {
+        this.hours += Number.parseInt(`${value}`);
     }
 
-    addsMinutes(value: number) {
-        this.minutes += value;
+    addsMinutes(value: number | string) {
+        this.minutes += Number.parseInt(`${value}`);
     }
 
-    addsSeconds(value: number) {
-        this.seconds += value;
+    addsSeconds(value: number | string) {
+        this.seconds += Number.parseInt(`${value}`);
     }
 
-    resetHours(value: number) {
-        this.hours = value;
+    resetHours(value: number | string) {
+        this.hours = Number.parseInt(`${value}`);
     }
 
-    resetMinutes(value: number) {
-        this.minutes = value;
+    resetMinutes(value: number | string) {
+        this.minutes = Number.parseInt(`${value}`);
     }
 
-    resetSeconds(value: number) {
-        this.seconds = value;
+    resetSeconds(value: number | string) {
+        this.seconds = Number.parseInt(`${value}`);
     }
 
 }
