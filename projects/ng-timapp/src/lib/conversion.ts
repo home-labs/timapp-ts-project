@@ -34,6 +34,7 @@ export class Conversion {
                 seconds: this.calculation.calculatesSeconds()
             }
         );
+
     }
 
 }

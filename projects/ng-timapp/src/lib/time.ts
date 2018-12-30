@@ -16,14 +16,9 @@ export class Time implements ClonablePrototypeInterface<Time> {
     private seconds: number;
 
     constructor(time: Object) {
-        const
-            hours: string | number = time['hours'],
-            minutes: string | number = time['minutes'],
-            seconds: string | number = time['seconds'];
-
-        this.hours = Number.parseInt(`${hours}` || '0');
-        this.minutes = Number.parseInt(`${minutes}` || '0');
-        this.seconds = Number.parseInt(`${seconds}` || '0');
+        this.hours = Number.parseInt(`${time.hours || 0}` );
+        this.minutes = Number.parseInt(`${time.minutes || 0}`);
+        this.seconds = Number.parseInt(`${time.seconds || 0}`);
     }
 
     getClone(): Time {
