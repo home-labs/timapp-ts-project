@@ -1,6 +1,11 @@
 import { Formatting } from './formatting';
 import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
+declare interface Object {
+    hours?: number | string;
+    minutes?: number | string;
+    seconds?: number | string;
+}
 
 export class Time implements ClonablePrototypeInterface<Time> {
 
@@ -8,14 +13,19 @@ export class Time implements ClonablePrototypeInterface<Time> {
     private minutes: number;
     private seconds: number;
 
-    constructor(timeAsHashTable: Object = {}) {
-        this.hours = Number.parseInt(timeAsHashTable['hours'] || '0');
-        this.minutes = Number.parseInt(timeAsHashTable['minutes'] || '0');
-        this.seconds = Number.parseInt(timeAsHashTable['seconds'] || '0');
+    constructor(time: Object) {
+        const
+            hours: string | number = time['hours'],
+            minutes: string | number = time['minutes'],
+            seconds: string | number = time['seconds'];
+
+        this.hours = Number.parseInt(`${hours}` || '0');
+        this.minutes = Number.parseInt(`${minutes}` || '0');
+        this.seconds = Number.parseInt(`${seconds}` || '0');
     }
 
     getClone(): Time {
-        return Object.assign(new Time(), this);
+        return Object.assign(new Time({}), this);
     }
 
     getHours(asAbsolute: boolean = true): string {
