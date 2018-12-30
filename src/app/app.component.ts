@@ -45,29 +45,29 @@ export class AppComponent {
     ngOnInit() {
         // console.log(`${this.conversor.getHours()}:${this.conversor.getMinutes()}:${this.conversor.getSeconds()}`);
 
+        let
+            sum: NgTimapp.Calculation = this.sumCalc.calculatesSum(new Time(
+                {
+                    minutes: 30,
+                    seconds: 30
+                }
+            ));
+
+        console.log(`original state (doesn't change): ${this.sumCalc.getHours()}:${this.sumCalc.getMinutes()}:${this.sumCalc.getSeconds()}`);
+        console.log(`sum's result: ${sum.getHours()}:${sum.getMinutes()}:${sum.getSeconds()}`);
+
         // let
-        //     sum: NgTimapp.Calculation = this.sumCalc.calculatesSum(
-        //         {
-        //             minutes: 30,
-        //             seconds: 30
-        //         }
+        //     elapsedTime: NgTimapp.Calculation = this.elapsedTimeCalc
+        //         .calculatesElapsedTime(new Time(
+        //             {
+        //                 hours: 1,
+        //                 minutes: 1,
+        //                 seconds: 1
+        //             }
+        //         )
         //     );
 
-        // console.log(`original state (doesn't change): ${this.sumCalc.getHours()}:${this.sumCalc.getMinutes()}:${this.sumCalc.getSeconds()}`);
-        // console.log(`sum's result: ${sum.getHours()}:${sum.getMinutes()}:${sum.getSeconds()}`);
-
-        let
-            elapsedTime: NgTimapp.Calculation = this.elapsedTimeCalc
-                .calculatesElapsedTime(new Time(
-                    {
-                        hours: 1,
-                        minutes: 1,
-                        seconds: 1
-                    }
-                )
-            );
-
-        console.log(`${elapsedTime.getElapsedHours()}:${elapsedTime.getElapsedMinutes()}:${elapsedTime.getElapsedSeconds()}`);
+        // console.log(`${elapsedTime.getElapsedHours()}:${elapsedTime.getElapsedMinutes()}:${elapsedTime.getElapsedSeconds()}`);
     }
 
 }

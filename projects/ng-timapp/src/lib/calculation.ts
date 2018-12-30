@@ -43,7 +43,7 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
                 .getSeconds())) * 60);
     }
 
-    calculatesSum(timeAsHashTable: Object): Calculation {
+    calculatesSum(time: Time): Calculation {
 
         const
             clone = this.getClone();
@@ -55,24 +55,24 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
             minutes: number = 0;
 
         // resolve seconds
-        if (!timeAsHashTable['seconds']) {
-            timeAsHashTable['seconds'] = 0;
+        if (!time['seconds']) {
+            time['seconds'] = 0;
         }
-        clone.time.addsSeconds(Number.parseInt(timeAsHashTable['seconds']));
+        clone.time.addsSeconds(time['seconds']);
         seconds = clone.calculatesSeconds();
 
         // resolve minutes
-        if (!timeAsHashTable['minutes']) {
-            timeAsHashTable['minutes'] = 0;
+        if (!time['minutes']) {
+            time['minutes'] = 0;
         }
-        clone.time.addsMinutes(Number.parseInt(timeAsHashTable['minutes']));
+        clone.time.addsMinutes(time['minutes']);
         minutes = clone.calculatesMinutes();
 
         // resolve hours
-        if (!timeAsHashTable['hours']) {
-            timeAsHashTable['hours'] = 0;
+        if (!time['hours']) {
+            time['hours'] = 0;
         }
-        clone.time.addsHours(Number.parseInt(timeAsHashTable['hours']));
+        clone.time.addsHours(time['hours']);
 
         clone.time.resetHours(clone.calculatesHours());
         clone.time.resetMinutes(minutes);
