@@ -1,10 +1,12 @@
 import { Formatting } from './formatting';
 import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
-declare interface Object {
+export declare interface Object {
+
     hours?: number | string;
     minutes?: number | string;
     seconds?: number | string;
+
 }
 
 export class Time implements ClonablePrototypeInterface<Time> {
