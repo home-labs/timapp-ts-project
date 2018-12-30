@@ -54,24 +54,13 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
             seconds: number = 0,
             minutes: number = 0;
 
-        // resolve seconds
-        if (!Number.parseInt(time.getSeconds())) {
-            time['seconds'] = 0;
-        }
+        // the order is important
         clone.time.addsSeconds(time.getSeconds());
         seconds = clone.calculatesSeconds();
 
-        // resolve minutes
-        if (!Number.parseInt(time.getMinutes())) {
-            time['minutes'] = 0;
-        }
         clone.time.addsMinutes(time.getMinutes());
         minutes = clone.calculatesMinutes();
 
-        // resolve hours
-        if (!Number.parseInt(time.getHours())) {
-            time['hours'] = 0;
-        }
         clone.time.addsHours(time.getHours());
 
         clone.time.resetHours(clone.calculatesHours());
