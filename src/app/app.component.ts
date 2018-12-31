@@ -12,16 +12,25 @@ import { Time } from 'projects/ng-timapp/src/lib';
 export class AppComponent {
     title = 'app';
 
+    private resolver: NgTimapp.Calculation;
     private conversor: NgTimapp.Conversion;
     private sumCalc: NgTimapp.Calculation;
     private elapsedTimeCalc: NgTimapp.Calculation;
 
     constructor() {
+        this.resolver = new NgTimapp.Calculation(new Time(
+            {
+                // hours: 0,
+                // minutes: 60,
+                seconds: 61
+            }
+        ));
+
         this.conversor = new NgTimapp.Conversion(new Time(
             {
-                hours: 0,
-                minutes: 60,
-                seconds: 61
+                hours: 1,
+                minutes: 1,
+                seconds: 1
             }
         ));
 
@@ -43,12 +52,15 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        // console.log(`${this.conversor.getHours()}:${this.conversor.getMinutes()}:${this.conversor.getSeconds()}`);
+        // console.log(`${this.resolver.getHours()}:${this.resolver.getMinutes()}:${this.resolver.getSeconds()}`);
+
+        console.log('conversion as minutes: ', this.conversor.asMinutes());
+        console.log('conversion as seconds: ',this.conversor.asSeconds());
 
         // let
         //     sum: NgTimapp.Calculation = this.sumCalc.calculatesSum(new Time(
         //         {
-        //             minutes: 30,
+        //             // minutes: 30,
         //             seconds: 30
         //         }
         //     ));
@@ -56,18 +68,18 @@ export class AppComponent {
         // console.log(`original state (doesn't change): ${this.sumCalc.getHours()}:${this.sumCalc.getMinutes()}:${this.sumCalc.getSeconds()}`);
         // console.log(`sum's result: ${sum.getHours()}:${sum.getMinutes()}:${sum.getSeconds()}`);
 
-        let
-            elapsedTime: NgTimapp.Calculation = this.elapsedTimeCalc
-                .calculatesElapsedTime(new Time(
-                    {
-                        hours: 1,
-                        minutes: 1,
-                        seconds: 1
-                    }
-                )
-            );
+        // let
+        //     elapsedTime: NgTimapp.Time = this.elapsedTimeCalc
+        //         .calculatesElapsedTime(new Time(
+        //             {
+        //                 hours: 1,
+        //                 minutes: 1,
+        //                 seconds: 1
+        //             }
+        //         )
+        //     );
 
-        console.log(`${elapsedTime.getElapsedHours()}:${elapsedTime.getElapsedMinutes()}:${elapsedTime.getElapsedSeconds()}`);
+        // console.log(`${elapsedTime.getHours()}:${elapsedTime.getMinutes()}:${elapsedTime.getSeconds()}`);
     }
 
 }

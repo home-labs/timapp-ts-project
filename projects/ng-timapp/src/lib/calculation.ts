@@ -1,5 +1,4 @@
 import { Time } from './time';
-import { Formatting } from './formatting';
 import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
 
@@ -7,40 +6,14 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
 
     private time: Time;
 
-    private elapsedHours: number;
-    private elapsedMinutes: number;
-    private elapsedSeconds: number;
-
     constructor(time: Time) {
         this.time = time;
 
-        this.elapsedHours = 0;
-        this.elapsedMinutes = 0;
-        this.elapsedSeconds = 0;
+        this.resolvesTime();
     }
 
     getClone(): Calculation {
         return Object.assign(new Calculation(new Time({})), this);
-    }
-
-    calculatesHours(): number {
-        return Number.parseInt(this.getHours()) + this
-            .hoursContainedInMinutes(Number.parseInt(this.getMinutes()));
-    }
-
-    calculatesMinutes(): number {
-        this.time.addsMinutes(this.minutesContainedInSeconds(Number
-            .parseInt(this.getSeconds())));
-
-        return Number.parseInt(this.getMinutes()) - (this
-            .hoursContainedInMinutes(Number.parseInt(this
-                .getMinutes())) * 60);
-    }
-
-    calculatesSeconds(): number {
-        return Number.parseInt(this.getSeconds()) - (this
-            .minutesContainedInSeconds(Number.parseInt(this
-                .getSeconds())) * 60);
     }
 
     calculatesSum(time: Time): Calculation {
@@ -70,8 +43,7 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
         return clone;
     }
 
-    calculatesElapsedTime(elapsedTime: Time): Calculation {
-
+    calculatesElapsedTime(elapsedTime: Time): Time {
         const
             clone = this.getClone(),
             calculation = new Calculation(elapsedTime),
@@ -108,11 +80,13 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
             realElapsedMinutes -= 1;
         }
 
-        clone.elapsedHours = realElapsedHours;
-        clone.elapsedMinutes = realElapsedMinutes;
-        clone.elapsedSeconds = realElapsedSeconds;
-
-        return clone;
+        return new Time(
+            {
+                hours: realElapsedHours,
+                minutes: realElapsedMinutes,
+                seconds: realElapsedSeconds
+            }
+        );
     }
 
     getHours(asAbsolute: boolean = true) {
@@ -127,16 +101,30 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
         return this.time.getSeconds(asAbsolute);
     }
 
-    getElapsedHours(): string {
-        return Formatting.formatHours(this.elapsedHours, false);
+    private resolvesTime() {
+        this.time.resetHours(this.calculatesHours());
+        this.time.resetMinutes(this.calculatesMinutes());
+        this.time.resetSeconds(this.calculatesSeconds());
     }
 
-    getElapsedMinutes(): string {
-        return Formatting.formatMinutes(this.elapsedMinutes, false);
+    private calculatesHours(): number {
+        return Number.parseInt(this.getHours()) + this
+            .hoursContainedInMinutes(Number.parseInt(this.getMinutes()));
     }
 
-    getElapsedSeconds(): string {
-        return Formatting.formatSerconds(this.elapsedSeconds, false);
+    private calculatesMinutes(): number {
+        this.time.addsMinutes(this.minutesContainedInSeconds(Number
+            .parseInt(this.getSeconds())));
+
+        return Number.parseInt(this.getMinutes()) - (this
+            .hoursContainedInMinutes(Number.parseInt(this
+                .getMinutes())) * 60);
+    }
+
+    private calculatesSeconds(): number {
+        return Number.parseInt(this.getSeconds()) - (this
+            .minutesContainedInSeconds(Number.parseInt(this
+                .getSeconds())) * 60);
     }
 
     private hoursContainedInMinutes(minutes: number = 0): number {
