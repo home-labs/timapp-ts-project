@@ -2,7 +2,7 @@
   "name": "ng-timapp",
   "version": "3.0.0-rc.1",
   "peerDependencies": {
-    "@angular/common": ">=4.0.0",
-    "@angular/core": ">=4.0.0"
+    "@angular/common": ">= 5",
+    "@angular/core": ">= 5"
   }
 }
