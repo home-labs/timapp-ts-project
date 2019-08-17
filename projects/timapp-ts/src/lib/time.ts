@@ -1,21 +1,27 @@
 import { Formatting } from './formatting';
 import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
-export declare interface Object {
+
+declare interface TimeConstructorParameters {
 
     hours?: number | string;
+
     minutes?: number | string;
+
     seconds?: number | string;
 
 }
 
+
 export class Time implements ClonablePrototypeInterface<Time> {
 
     private hours: number;
+
     private minutes: number;
+
     private seconds: number;
 
-    constructor(time: Object) {
+    constructor(time: TimeConstructorParameters) {
         this.hours = Number.parseInt(`${time.hours || 0}` );
         this.minutes = Number.parseInt(`${time.minutes || 0}`);
         this.seconds = Number.parseInt(`${time.seconds || 0}`);

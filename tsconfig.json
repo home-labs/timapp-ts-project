@@ -17,11 +17,11 @@
       "dom"
     ],
     "paths": {
-      "ng-timapp": [
-        "dist/ng-timapp"
+      "timapp-ts": [
+        "dist/timapp-ts"
       ],
-      "ng-timapp/*": [
-        "dist/ng-timapp/*"
+      "timapp-ts/*": [
+        "dist/timapp-ts/*"
       ]
     }
   }

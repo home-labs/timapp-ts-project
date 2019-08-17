@@ -1,6 +1,6 @@
 {
-  "name": "ng-timapp",
-  "version": "3.0.0-rc.1",
+  "name": "timapp-ts",
+  "version": "1.0.0-rc.1",
   "peerDependencies": {
     "@angular/common": ">= 5",
     "@angular/core": ">= 5"

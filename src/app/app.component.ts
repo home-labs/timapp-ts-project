@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { NgTimapp } from '../../projects/ng-timapp/src/public_api';
-import { Time } from 'projects/ng-timapp/src/lib';
+// import { Timapp } from '../../projects/timapp-ts';
+import { Timapp } from 'timapp-ts';
 
 
 @Component({
@@ -10,15 +10,17 @@ import { Time } from 'projects/ng-timapp/src/lib';
     styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-    title = 'app';
 
-    private resolver: NgTimapp.Calculation;
-    private conversor: NgTimapp.Conversion;
-    private sumCalc: NgTimapp.Calculation;
-    private elapsedTimeCalc: NgTimapp.Calculation;
+    private resolver: Timapp.Calculation;
+
+    private conversor: Timapp.Conversion;
+
+    private sumCalc: Timapp.Calculation;
+
+    private elapsedTimeCalc: Timapp.Calculation;
 
     constructor() {
-        this.resolver = new NgTimapp.Calculation(new Time(
+        this.resolver = new Timapp.Calculation(new Timapp.Time(
             {
                 // hours: 0,
                 // minutes: 60,
@@ -26,7 +28,7 @@ export class AppComponent {
             }
         ));
 
-        this.conversor = new NgTimapp.Conversion(new Time(
+        this.conversor = new Timapp.Conversion(new Timapp.Time(
             {
                 hours: 1,
                 minutes: 1,
@@ -34,7 +36,7 @@ export class AppComponent {
             }
         ));
 
-        this.sumCalc = new NgTimapp.Calculation(new Time(
+        this.sumCalc = new Timapp.Calculation(new Timapp.Time(
             {
                 hours: 0,
                 minutes: 30,
@@ -42,7 +44,7 @@ export class AppComponent {
             }
         ));
 
-        this.elapsedTimeCalc = new NgTimapp.Calculation(new Time(
+        this.elapsedTimeCalc = new Timapp.Calculation(new Timapp.Time(
             {
                 hours: 22,
                 minutes: 58,
@@ -58,7 +60,7 @@ export class AppComponent {
         console.log('conversion as seconds: ',this.conversor.asSeconds());
 
         // let
-        //     sum: NgTimapp.Calculation = this.sumCalc.calculatesSum(new Time(
+        //     sum: Timapp.Calculation = this.sumCalc.calculatesSum(new Time(
         //         {
         //             // minutes: 30,
         //             seconds: 30
@@ -69,7 +71,7 @@ export class AppComponent {
         // console.log(`sum's result: ${sum.getHours()}:${sum.getMinutes()}:${sum.getSeconds()}`);
 
         // let
-        //     elapsedTime: NgTimapp.Time = this.elapsedTimeCalc
+        //     elapsedTime: Timapp.Time = this.elapsedTimeCalc
         //         .calculatesElapsedTime(new Time(
         //             {
         //                 hours: 1,
