@@ -24,8 +24,8 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
         clone.time = this.time.getClone();
 
         let
-            seconds: number = 0,
-            minutes: number = 0;
+            seconds: Number = 0,
+            minutes: Number = 0;
 
         // the order is important
         clone.time.addsSeconds(time.getSeconds());
@@ -37,8 +37,8 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
         clone.time.addsHours(time.getHours());
 
         clone.time.resetHours(clone.calculatesHours());
-        clone.time.resetMinutes(minutes);
-        clone.time.resetSeconds(seconds);
+        clone.time.resetMinutes(minutes as number);
+        clone.time.resetSeconds(seconds as number);
 
         return clone;
     }
