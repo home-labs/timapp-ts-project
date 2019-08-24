@@ -12,17 +12,17 @@ export class Conversion {
 
     asMinutes(): number {
         const
-            hours: number = Number.parseInt(this.calculation.getHours()),
-            minutes: number = Number.parseInt(this.calculation.getMinutes());
+            hours: number = parseInt(this.calculation.getHours(), 10),
+            minutes: number = parseInt(this.calculation.getMinutes(), 10);
 
         return (hours * 60) + minutes;
     }
 
     asSeconds(): number {
         const
-            hours: number = Number.parseInt(this.calculation.getHours()),
-            minutes: number = Number.parseInt(this.calculation.getMinutes()),
-            seconds: number = Number.parseInt(this.calculation.getSeconds());
+            hours: number = parseInt(this.calculation.getHours(), 10),
+            minutes: number = parseInt(this.calculation.getMinutes(), 10),
+            seconds: number = parseInt(this.calculation.getSeconds(), 10);
 
         return (hours * 60 * 60) + (minutes * 60) + seconds;
     }

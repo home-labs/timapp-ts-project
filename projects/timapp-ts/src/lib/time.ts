@@ -4,11 +4,11 @@ import { ClonablePrototypeInterface } from './clonable-prototype-interface';
 
 declare interface TimeConstructorParameters {
 
-    hours?: number | string;
+    hours?: Number | string;
 
-    minutes?: number | string;
+    minutes?: Number | string;
 
-    seconds?: number | string;
+    seconds?: Number | string;
 
 }
 
@@ -22,9 +22,9 @@ export class Time implements ClonablePrototypeInterface<Time> {
     private seconds: number;
 
     constructor(time: TimeConstructorParameters) {
-        this.hours = Number.parseInt(`${time.hours || 0}` );
-        this.minutes = Number.parseInt(`${time.minutes || 0}`);
-        this.seconds = Number.parseInt(`${time.seconds || 0}`);
+        this.hours = parseInt(`${time.hours || 0}`, 10);
+        this.minutes = parseInt(`${time.minutes || 0}`, 10);
+        this.seconds = parseInt(`${time.seconds || 0}`, 10);
     }
 
     getClone(): Time {
@@ -43,28 +43,28 @@ export class Time implements ClonablePrototypeInterface<Time> {
         return Formatting.formatSerconds(this.seconds, asAbsolute);
     }
 
-    addsHours(value: number | string) {
-        this.hours += Number.parseInt(`${value}`);
+    addsHours(value: Number | string) {
+        this.hours += parseInt(`${value}`, 10);
     }
 
-    addsMinutes(value: number | string) {
-        this.minutes += Number.parseInt(`${value}`);
+    addsMinutes(value: Number | string) {
+        this.minutes += parseInt(`${value}`, 10);
     }
 
-    addsSeconds(value: number | string) {
-        this.seconds += Number.parseInt(`${value}`);
+    addsSeconds(value: Number | string) {
+        this.seconds += parseInt(`${value}`, 10);
     }
 
-    resetHours(value: number | string) {
-        this.hours = Number.parseInt(`${value}`);
+    resetHours(value: Number | string) {
+        this.hours = parseInt(`${value}`, 10);
     }
 
-    resetMinutes(value: number | string) {
-        this.minutes = Number.parseInt(`${value}`);
+    resetMinutes(value: Number | string) {
+        this.minutes = parseInt(`${value}`, 10);
     }
 
-    resetSeconds(value: number | string) {
-        this.seconds = Number.parseInt(`${value}`);
+    resetSeconds(value: Number | string) {
+        this.seconds = parseInt(`${value}`, 10);
     }
 
 }

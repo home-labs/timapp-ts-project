@@ -37,8 +37,8 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
         clone.time.addsHours(time.getHours());
 
         clone.time.resetHours(clone.calculatesHours());
-        clone.time.resetMinutes(minutes as number);
-        clone.time.resetSeconds(seconds as number);
+        clone.time.resetMinutes(minutes);
+        clone.time.resetSeconds(seconds);
 
         return clone;
     }
@@ -108,23 +108,22 @@ export class Calculation  implements ClonablePrototypeInterface<Calculation> {
     }
 
     private calculatesHours(): number {
-        return Number.parseInt(this.getHours()) + this
-            .hoursContainedInMinutes(Number.parseInt(this.getMinutes()));
+        return parseInt(this.getHours(), 10) + this
+            .hoursContainedInMinutes(parseInt(this.getMinutes(), 10));
     }
 
     private calculatesMinutes(): number {
-        this.time.addsMinutes(this.minutesContainedInSeconds(Number
-            .parseInt(this.getSeconds())));
+        this.time.addsMinutes(this.minutesContainedInSeconds(parseInt(this.getSeconds(), 10)));
 
-        return Number.parseInt(this.getMinutes()) - (this
-            .hoursContainedInMinutes(Number.parseInt(this
-                .getMinutes())) * 60);
+        return parseInt(this.getMinutes(), 10) - (this
+            .hoursContainedInMinutes(parseInt(this
+                .getMinutes(), 10)) * 60);
     }
 
     private calculatesSeconds(): number {
-        return Number.parseInt(this.getSeconds()) - (this
-            .minutesContainedInSeconds(Number.parseInt(this
-                .getSeconds())) * 60);
+        return parseInt(this.getSeconds(), 10) - (this
+            .minutesContainedInSeconds(parseInt(this
+                .getSeconds(), 10)) * 60);
     }
 
     private hoursContainedInMinutes(minutes: number = 0): number {
