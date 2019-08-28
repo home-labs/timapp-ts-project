@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/@rplaurindo/timapp",
+  "dest": "../../dist/@rplaurindo/timapp.ts",
   "lib": {
     "entryFile": "index.ts"
   }
