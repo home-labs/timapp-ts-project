@@ -1,5 +1,5 @@
 {
-  "name": "timapp-ts",
+  "name": "@rplaurindo/timapp.ts",
   "version": "1.0.0-rc.1",
   "peerDependencies": {
     "@angular/common": ">= 5",
