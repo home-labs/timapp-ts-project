@@ -17,11 +17,11 @@
       "dom"
     ],
     "paths": {
-      "timapp": [
-        "dist/timapp"
+      "@rplaurindo/timapp": [
+        "dist/@rplaurindo/timapp"
       ],
-      "timapp/*": [
-        "dist/timapp/*"
+      "@rplaurindo/timapp/*": [
+        "dist/@rplaurindo/timapp/*"
       ]
     }
   }

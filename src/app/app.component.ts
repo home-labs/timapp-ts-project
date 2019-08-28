@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-// import { Timapp } from '../../projects/timapp.ts';
-import { Timapp } from 'timapp';
+import { Timapp } from '@rplaurindo/timapp';
 
 
 @Component({
