@@ -1,2 +1,1 @@
-import * as Timapp from './src/timapp';
-export { Timapp };
+export * from './src/timapp';
