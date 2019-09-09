@@ -27,5 +27,9 @@
         "dist/@rplaurindo/timapp.ts/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
