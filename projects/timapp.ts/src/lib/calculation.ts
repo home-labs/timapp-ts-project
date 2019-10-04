@@ -1,8 +1,8 @@
 import { Time } from './time';
-import { ClonablePrototypeInterface } from './clonable-prototype-interface';
+import { IClonablePrototype } from './i-clonable-prototype';
 
 
-export class Calculation  implements ClonablePrototypeInterface<Calculation> {
+export class Calculation  implements IClonablePrototype<Calculation> {
 
     private time: Time;
 

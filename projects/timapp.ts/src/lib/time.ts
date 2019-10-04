@@ -1,19 +1,19 @@
 import { Formatting } from './formatting';
-import { ClonablePrototypeInterface } from './clonable-prototype-interface';
+import { IClonablePrototype } from './i-clonable-prototype';
 
 
-declare interface TimeConstructorParameters {
+declare interface ITimeConstructorParameters {
 
-    hours?: Number | string;
+    hours?: number | string;
 
-    minutes?: Number | string;
+    minutes?: number | string;
 
-    seconds?: Number | string;
+    seconds?: number | string;
 
 }
 
 
-export class Time implements ClonablePrototypeInterface<Time> {
+export class Time implements IClonablePrototype<Time> {
 
     private hours: number;
 
@@ -21,7 +21,7 @@ export class Time implements ClonablePrototypeInterface<Time> {
 
     private seconds: number;
 
-    constructor(time: TimeConstructorParameters) {
+    constructor(time: ITimeConstructorParameters) {
         this.hours = parseInt(`${time.hours || 0}`, 10);
         this.minutes = parseInt(`${time.minutes || 0}`, 10);
         this.seconds = parseInt(`${time.seconds || 0}`, 10);
@@ -43,27 +43,27 @@ export class Time implements ClonablePrototypeInterface<Time> {
         return Formatting.formatSerconds(this.seconds, asAbsolute);
     }
 
-    addsHours(value: Number | string) {
+    addsHours(value: number | string) {
         this.hours += parseInt(`${value}`, 10);
     }
 
-    addsMinutes(value: Number | string) {
+    addsMinutes(value: number | string) {
         this.minutes += parseInt(`${value}`, 10);
     }
 
-    addsSeconds(value: Number | string) {
+    addsSeconds(value: number | string) {
         this.seconds += parseInt(`${value}`, 10);
     }
 
-    resetHours(value: Number | string) {
+    resetHours(value: number | string) {
         this.hours = parseInt(`${value}`, 10);
     }
 
-    resetMinutes(value: Number | string) {
+    resetMinutes(value: number | string) {
         this.minutes = parseInt(`${value}`, 10);
     }
 
-    resetSeconds(value: Number | string) {
+    resetSeconds(value: number | string) {
         this.seconds = parseInt(`${value}`, 10);
     }
 
