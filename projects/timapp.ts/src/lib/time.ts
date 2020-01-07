@@ -32,15 +32,15 @@ export class Time implements IClonablePrototype<Time> {
     }
 
     getHours(asAbsolute: boolean = true): string {
-        return Formatting.formatHours(this.hours, asAbsolute);
+        return Formatting.twoDigits(this.hours, asAbsolute);
     }
 
     getMinutes(asAbsolute: boolean = true): string {
-        return Formatting.formatMinutes(this.minutes, asAbsolute);
+        return Formatting.twoDigits(this.minutes, asAbsolute);
     }
 
     getSeconds(asAbsolute: boolean = true): string {
-        return Formatting.formatSerconds(this.seconds, asAbsolute);
+        return Formatting.twoDigits(this.seconds, asAbsolute);
     }
 
     addsHours(value: number | string) {
