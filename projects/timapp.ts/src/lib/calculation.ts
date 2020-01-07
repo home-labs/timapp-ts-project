@@ -23,9 +23,9 @@ export class Calculation  implements IClonablePrototype<Calculation> {
 
         clone.time = this.time.getClone();
 
-        let
-            seconds: Number = 0,
-            minutes: Number = 0;
+        let seconds = 0;
+
+        let minutes = 0;
 
         // the order is important
         clone.time.addsSeconds(time.getSeconds());
@@ -44,25 +44,35 @@ export class Calculation  implements IClonablePrototype<Calculation> {
     }
 
     calculatesElapsedTime(elapsedTime: Time): Time {
-        const
-            clone = this.getClone(),
-            calculation = new Calculation(elapsedTime),
-            calculatedHours: number = clone.calculatesHours(),
-            calculatedMinutes: number = clone.calculatesMinutes(),
-            calculatedSeconds: number = clone.calculatesSeconds(),
-            elapsedResolvedHours: number = calculation.calculatesHours(),
-            elapsedResolvedMinutes: number = calculation.calculatesMinutes(),
-            elapsedResolvedSeconds: number = calculation.calculatesSeconds(),
-            elapsedSeconds: number = elapsedResolvedSeconds -
-                calculatedSeconds,
-            elapsedMinutes: number = elapsedResolvedMinutes -
-                calculatedMinutes,
-            elapsedHours: number = elapsedResolvedHours - calculatedHours;
+        const clone = this.getClone();
 
-        let
-            realElapsedHours: number = elapsedHours,
-            realElapsedMinutes: number = elapsedMinutes,
-            realElapsedSeconds: number = elapsedSeconds;
+        const calculation: Calculation = new Calculation(elapsedTime);
+
+        const calculatedHours: number = clone.calculatesHours();
+
+        const calculatedMinutes: number = clone.calculatesMinutes();
+
+        const calculatedSeconds: number = clone.calculatesSeconds();
+
+        const elapsedResolvedHours: number = calculation.calculatesHours();
+
+        const elapsedResolvedMinutes: number = calculation.calculatesMinutes();
+
+        const elapsedResolvedSeconds: number = calculation.calculatesSeconds();
+
+        const elapsedSeconds: number = elapsedResolvedSeconds -
+                calculatedSeconds;
+
+        const elapsedMinutes: number = elapsedResolvedMinutes -
+                calculatedMinutes;
+
+        const elapsedHours: number = elapsedResolvedHours - calculatedHours;
+
+        let realElapsedHours: number = elapsedHours;
+
+        let realElapsedMinutes: number = elapsedMinutes;
+
+        let realElapsedSeconds: number = elapsedSeconds;
 
         if (elapsedHours < 0) {
             realElapsedHours = 24 - Math.abs(elapsedHours);
