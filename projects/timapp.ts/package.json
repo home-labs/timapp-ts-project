@@ -1,6 +1,6 @@
 {
-  "name": "@rplaurindo/timapp.ts",
-  "version": "2.0.0-rc.2",
+  "name": "@actjs.on/timapp.ts",
+  "version": "1.0.0-rc.1",
   "peerDependencies": {
     "@angular/common": ">= 5",
     "@angular/core": ">= 5"

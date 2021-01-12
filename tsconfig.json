@@ -20,11 +20,11 @@
       "dom"
     ],
     "paths": {
-      "@rplaurindo/timapp.ts": [
-        "dist/@rplaurindo/timapp.ts"
+      "@actjs.on/timapp.ts": [
+        "dist/@actjs.on/timapp.ts"
       ],
-      "@rplaurindo/timapp.ts/*": [
-        "dist/@rplaurindo/timapp.ts/*"
+      "@actjs.on/timapp.ts/*": [
+        "dist/@actjs.on/timapp.ts/*"
       ]
     }
   },
