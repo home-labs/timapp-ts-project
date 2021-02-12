@@ -54,9 +54,9 @@ export class AppComponent {
 
     ngOnInit() {
         // console.log(`${this.resolver.getHours()}:${this.resolver.getMinutes()}:${this.resolver.getSeconds()}`);
-
-        console.log('conversion as minutes: ', this.conversor.asMinutes());
-        console.log('conversion as seconds: ',this.conversor.asSeconds());
+        console.log('Conversion of 01:01:01');
+        console.log('in minutes: ', this.conversor.asMinutes());
+        console.log('in seconds: ',this.conversor.asSeconds());
 
         // let
         //     sum: Timapp.Calculation = this.sumCalc.calculatesSum(new Time(
