@@ -1,7 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/@actjs.on/timapp.ts",
+  "dest": "../../dist/@actjs.on/timapp-ts",
   "lib": {
-    "entryFile": "index.ts"
+    "entryFile": "public-api.ts"
   }
 }

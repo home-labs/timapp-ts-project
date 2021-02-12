@@ -1,7 +1,8 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/@actjs.on/timapp.ts",
+    "outDir": "../../dist/@actjs.on/timapp-ts",
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
@@ -12,7 +13,9 @@
     ]
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true
   },
   "exclude": [
     "src/test.ts",

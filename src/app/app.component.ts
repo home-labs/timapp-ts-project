@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Timapp } from '@actjs.on/timapp.ts';
+import { Timapp } from '@actjs.on/timapp-ts';
 
 
 @Component({

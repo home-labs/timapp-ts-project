@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "timapp.ts-project": {
+    "timapp-ts-project": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/timapp.ts-project",
+            "outputPath": "dist/timapp-ts-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "timapp.ts-project:build"
+            "browserTarget": "timapp-ts-project:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "timapp.ts-project:build:production"
+              "browserTarget": "timapp-ts-project:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "timapp.ts-project:build"
+            "browserTarget": "timapp-ts-project:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "timapp.ts-project-e2e": {
+    "timapp-ts-project-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,7 +115,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "timapp.ts-project:serve"
+            "devServerTarget": "timapp-ts-project:serve"
           },
           "configurations": {
             "production": {
@@ -134,33 +134,33 @@
         }
       }
     },
-    "timapp.ts": {
-      "root": "projects/timapp.ts",
-      "sourceRoot": "projects/timapp.ts",
+    "timapp-ts": {
       "projectType": "library",
+      "root": "projects/timapp-ts",
+      "sourceRoot": "projects/timapp-ts",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/timapp.ts/tsconfig.lib.json",
-            "project": "projects/timapp.ts/ng-package.json"
+            "tsConfig": "projects/timapp-ts/tsconfig.lib.json",
+            "project": "projects/timapp-ts/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/timapp.ts/src/test.ts",
-            "tsConfig": "projects/timapp.ts/tsconfig.spec.json",
-            "karmaConfig": "projects/timapp.ts/karma.conf.js"
+            "main": "projects/timapp-ts/src/test.ts",
+            "tsConfig": "projects/timapp-ts/tsconfig.spec.json",
+            "karmaConfig": "projects/timapp-ts/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/timapp.ts/tsconfig.lib.json",
-              "projects/timapp.ts/tsconfig.spec.json"
+              "projects/timapp-ts/tsconfig.lib.json",
+              "projects/timapp-ts/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -170,5 +170,5 @@
       }
     }
   },
-  "defaultProject": "timapp.ts-project"
+  "defaultProject": "timapp-ts-project"
 }
