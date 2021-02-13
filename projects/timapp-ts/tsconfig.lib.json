@@ -2,7 +2,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/@actjs.on/timapp-ts",
+    "outDir": "../../dist/lib",
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
