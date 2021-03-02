@@ -139,7 +139,7 @@
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ng-web-compack/tsconfig.lib.prod.json"
+              "tsConfig": "projects/timapp-ts/tsconfig.lib.prod.json"
             }
           }
         },
@@ -166,5 +166,8 @@
       }
     }
   },
-  "defaultProject": "timapp-ts-project"
+  "defaultProject": "timapp-ts-project",
+  "cli": {
+    "analytics": "cdda9c60-b13a-4081-b9d2-bfdebd8178f7"
+  }
 }

@@ -1,1 +1,1 @@
-export * from './src/timapp';
+export * from './timapp';
