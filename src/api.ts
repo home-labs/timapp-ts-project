@@ -1,4 +1,4 @@
-export { Calculation } from './lib/calculation';
-export { Conversion } from './lib/conversion';
-export { Formatting } from './lib/formatting';
-export { Time } from './lib/time';
+export { Calculation } from './lib/calculation.js';
+export { Conversion } from './lib/conversion.js';
+export { Formatting } from './lib/formatting.js';
+export { Time } from './lib/time.js';

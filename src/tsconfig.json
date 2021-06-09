@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "./",
+    "outDir": "../dist/@actjs.on/e-chronos"
+  },
+  "include": [
+    "lib/**/*",
+    "tests/**/*",
+    "api.ts",
+    "e-chronos.ts",
+    "index.ts"
+  ]
+}

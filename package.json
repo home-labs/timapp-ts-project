@@ -1,0 +1,15 @@
+{
+  "name": "@actjs.on/e-chronos",
+  "version": "1.0.0-rc.1",
+  "type": "module",
+  "description": "A helpful methods to calculate time.",
+  "repository": {
+    "url": "https://github.com/home-labs/e-chronos"
+  },
+  "license": "MPL-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "~14.14.37",
+    "typescript": "~4.0.2"
+  }
+}

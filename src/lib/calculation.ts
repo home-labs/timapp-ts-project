@@ -1,5 +1,5 @@
-import { Time } from './time';
-import { IClonablePrototype } from './i-clonable-prototype';
+import { Time } from './time.js';
+import { IClonablePrototype } from './i-clonable-prototype.js';
 
 
 export class Calculation  implements IClonablePrototype<Calculation> {

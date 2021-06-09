@@ -1,1 +1,1 @@
-export * from './e-chronos';
+export * from './e-chronos.js';

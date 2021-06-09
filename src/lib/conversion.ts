@@ -1,5 +1,5 @@
-import { Calculation } from './calculation';
-import { Time } from './time';
+import { Calculation } from './calculation.js';
+import { Time } from './time.js';
 
 
 export class Conversion {

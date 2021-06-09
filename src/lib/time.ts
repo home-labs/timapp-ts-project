@@ -1,5 +1,5 @@
-import { Formatting } from './formatting';
-import { IClonablePrototype } from './i-clonable-prototype';
+import { Formatting } from './formatting.js';
+import { IClonablePrototype } from './i-clonable-prototype.js';
 
 
 declare interface ITimeConstructorParameters {

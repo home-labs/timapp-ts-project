@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "../",
+    "paths": {
+      "@actjs.on/e-chronos": [
+        "dist/@actjs.on/e-chronos"
+      ],
+      "@actjs.on/e-chronos/*": [
+        "dist/@actjs.on/e-chronos/*"
+      ]
+    }
+  }
+}
